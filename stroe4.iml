@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="Spring" name="Spring">
+      <configuration>
+        <fileset id="fileset" name="DBConfig" removed="false">
+          <file>file://$MODULE_DIR$/src/main/java/com/exercise/config/DBConfig.java</file>
+          <file>file://$MODULE_DIR$/src/main/java/com/exercise/config/MyMvcConfig.java</file>
+        </fileset>
+      </configuration>
+    </facet>
+  </component>
+</module>

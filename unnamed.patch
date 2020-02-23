@@ -1,0 +1,1333 @@
+Index: pom.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- pom.xml	(date 1581841906048)
++++ pom.xml	(date 1581841906048)
+@@ -0,0 +1,219 @@
++<?xml version="1.0" encoding="UTF-8"?>
++
++<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
++  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
++  <modelVersion>4.0.0</modelVersion>
++
++  <groupId>com.exercise</groupId>
++  <artifactId>stroe4</artifactId>
++  <version>1.0-SNAPSHOT</version>
++  <packaging>war</packaging>
++
++  <name>stroe4 Maven Webapp</name>
++  <!-- FIXME change it to the project's website -->
++  <url>http://www.example.com</url>
++
++  <properties>
++    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
++    <encoding>UTF-8</encoding>
++    <java.version>1.8</java.version>
++    <maven.compiler.source>1.8</maven.compiler.source>
++    <maven.compiler.target>1.8</maven.compiler.target>
++    <spring.version>4.3.7.RELEASE</spring.version>
++  </properties>
++
++  <dependencies>
++    <dependency>
++      <groupId>junit</groupId>
++      <artifactId>junit</artifactId>
++      <version>4.11</version>
++      <scope>test</scope>
++    </dependency>
++
++    <dependency>
++      <groupId>javax.servlet</groupId>
++      <artifactId>javax.servlet-api</artifactId>
++      <version>4.0.0</version>
++      <scope>provided</scope>
++    </dependency>
++    <dependency>
++      <groupId>javax.servlet.jsp</groupId>
++      <artifactId>jsp-api</artifactId>
++      <version>2.2</version>
++    </dependency>
++    <dependency>
++      <groupId>javax.servlet</groupId>
++      <artifactId>jstl</artifactId>
++      <version>1.2</version>
++    </dependency>
++    <dependency>
++      <groupId>javax</groupId>
++      <artifactId>javaee-api</artifactId>
++      <version>7.0</version>
++      <!--http://blog.csdn.net/daihui05/article/details/7476976-->
++      <scope>provided</scope>
++    </dependency>
++    <!-- https://mvnrepository.com/artifact/javax.json/javax.json-api -->
++    <!-- https://mvnrepository.com/artifact/javax.json/javax.json-api -->
++
++
++
++    <dependency>
++      <groupId>mysql</groupId>
++      <artifactId>mysql-connector-java</artifactId>
++      <version>5.1.39</version>
++    </dependency>
++    <dependency>
++      <groupId>commons-dbcp</groupId>
++      <artifactId>commons-dbcp</artifactId>
++      <version>1.2.1</version>
++    </dependency>
++
++    <dependency>
++      <groupId>org.apache.maven</groupId>
++      <artifactId>maven-model</artifactId>
++      <version>3.0</version>
++    </dependency>
++
++    <dependency>
++      <groupId>javax.servlet</groupId>
++      <artifactId>javax.servlet-api</artifactId>
++      <version>3.1.0</version>
++    </dependency>
++
++    <!--日志-->
++    <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12 -->
++    <dependency>
++      <groupId>org.slf4j</groupId>
++      <artifactId>slf4j-log4j12</artifactId>
++      <version>1.8.0-alpha0</version>
++      <scope>test</scope>
++    </dependency>
++
++
++    <!-- spring start -->
++    <dependency>
++      <groupId>org.springframework</groupId>
++      <artifactId>spring-core</artifactId>
++      <version>${spring.version}</version>
++    </dependency>
++    <dependency>
++      <groupId>org.springframework</groupId>
++      <artifactId>spring-web</artifactId>
++      <version>${spring.version}</version>
++    </dependency>
++    <dependency>
++      <groupId>org.springframework</groupId>
++      <artifactId>spring-oxm</artifactId>
++      <version>${spring.version}</version>
++    </dependency>
++    <dependency>
++      <groupId>org.springframework</groupId>
++      <artifactId>spring-tx</artifactId>
++      <version>${spring.version}</version>
++    </dependency>
++    <dependency>
++      <groupId>org.springframework</groupId>
++      <artifactId>spring-jdbc</artifactId>
++      <version>${spring.version}</version>
++    </dependency>
++    <dependency>
++      <groupId>org.springframework</groupId>
++      <artifactId>spring-webmvc</artifactId>
++      <version>${spring.version}</version>
++    </dependency>
++    <dependency>
++      <groupId>org.springframework</groupId>
++      <artifactId>spring-aop</artifactId>
++      <version>${spring.version}</version>
++    </dependency>
++    <dependency>
++      <groupId>org.springframework</groupId>
++      <artifactId>spring-context-support</artifactId>
++      <version>${spring.version}</version>
++    </dependency>
++    <dependency>
++      <groupId>org.springframework</groupId>
++      <artifactId>spring-orm</artifactId>
++      <version>${spring.version}</version>
++    </dependency>
++
++    <!-- hibernate 配置 begin -->
++    <dependency>
++      <groupId>org.hibernate</groupId>
++      <artifactId>hibernate-core</artifactId>
++      <version>5.4.6.Final</version>
++    </dependency>
++    <dependency>
++      <groupId>org.hibernate</groupId>
++      <artifactId>hibernate-entitymanager</artifactId>
++      <version>5.4.3.Final</version>
++    </dependency>
++    <!-- hibernate 配置 end -->
++
++    <!-- https://mvnrepository.com/artifact/com.mchange/c3p0 -->
++    <dependency>
++      <groupId>com.mchange</groupId>
++      <artifactId>c3p0</artifactId>
++      <version>0.9.5.2</version>
++    </dependency>
++    <!--json begin-->
++    <dependency>
++      <groupId>com.fasterxml.jackson.core</groupId>
++      <artifactId>jackson-core</artifactId>
++      <version>2.9.8</version>
++    </dependency>
++    <dependency>
++      <groupId>com.fasterxml.jackson.core</groupId>
++      <artifactId>jackson-databind</artifactId>
++      <version>2.9.8</version>
++    </dependency>
++    <dependency>
++      <groupId>com.fasterxml.jackson.core</groupId>
++      <artifactId>jackson-annotations</artifactId>
++      <version>2.9.0</version>
++    </dependency>
++    <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations -->
++
++    <!--json end-->
++  </dependencies>
++
++  <build>
++    <finalName>stroe4</finalName>
++    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
++      <plugins>
++        <plugin>
++          <artifactId>maven-clean-plugin</artifactId>
++          <version>3.1.0</version>
++        </plugin>
++        <!-- see http://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_war_packaging -->
++        <plugin>
++          <artifactId>maven-resources-plugin</artifactId>
++          <version>3.0.2</version>
++        </plugin>
++        <plugin>
++          <artifactId>maven-compiler-plugin</artifactId>
++          <version>3.8.0</version>
++        </plugin>
++        <plugin>
++          <artifactId>maven-surefire-plugin</artifactId>
++          <version>2.22.1</version>
++        </plugin>
++        <plugin>
++          <artifactId>maven-war-plugin</artifactId>
++          <version>3.2.2</version>
++        </plugin>
++        <plugin>
++          <artifactId>maven-install-plugin</artifactId>
++          <version>2.5.2</version>
++        </plugin>
++        <plugin>
++          <artifactId>maven-deploy-plugin</artifactId>
++          <version>2.8.2</version>
++        </plugin>
++      </plugins>
++
++
++    </pluginManagement>
++  </build>
++</project>
+Index: .idea/compiler.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/compiler.xml	(date 1582296464106)
++++ .idea/compiler.xml	(date 1582296464106)
+@@ -0,0 +1,13 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="CompilerConfiguration">
++    <annotationProcessing>
++      <profile name="Maven default annotation processors profile" enabled="true">
++        <sourceOutputDir name="target/generated-sources/annotations" />
++        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
++        <outputRelativeToContentRoot value="true" />
++        <module name="stroe4" />
++      </profile>
++    </annotationProcessing>
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/misc.xml	(date 1581151772401)
++++ .idea/misc.xml	(date 1581151772401)
+@@ -0,0 +1,17 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="ExternalStorageConfigurationManager" enabled="true" />
++  <component name="FrameworkDetectionExcludesConfiguration">
++    <file type="web" url="file://$PROJECT_DIR$" />
++  </component>
++  <component name="MavenProjectsManager">
++    <option name="originalFiles">
++      <list>
++        <option value="$PROJECT_DIR$/pom.xml" />
++      </list>
++    </option>
++  </component>
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8" project-jdk-type="JavaSDK">
++    <output url="file://$PROJECT_DIR$/out" />
++  </component>
++</project>
+\ No newline at end of file
+Index: src/main/resources/jdbc.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>NATIVE_TO_ASCII_UTF-8
+===================================================================
+--- src/main/resources/jdbc.properties	(date 1581764422955)
++++ src/main/resources/jdbc.properties	(date 1581764422955)
+@@ -0,0 +1,10 @@
++db.driverClass=com.mysql.jdbc.Driver
++db.url=jdbc:mysql://localhost:3306/store2?useUnicode=true&characterEncoding=UTF-8
++db.username=root
++db.password=
++db.initialSize=0
++db.maxActive=500
++db.maxIdle=20
++db.minIdle=1
++db.maxWait=60000
++
+Index: .idea/encodings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/encodings.xml	(date 1581151772580)
++++ .idea/encodings.xml	(date 1581151772580)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="Encoding" native2AsciiForPropertiesFiles="true" addBOMForNewFiles="with NO BOM">
++    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
++  </component>
++</project>
+\ No newline at end of file
+Index: src/main/resources/log4j.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>NATIVE_TO_ASCII_UTF-8
+===================================================================
+--- src/main/resources/log4j.properties	(date 1575502429302)
++++ src/main/resources/log4j.properties	(date 1575502429302)
+@@ -0,0 +1,7 @@
++log4j.rootLogger=DEBUG,stdout
++log4j.logger.org.mybatis=DEBUG
++log4j.appender.stdout=org.apache.log4j.ConsoleAppender
++log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
++log4j.appender.stdout.layout.ConversionPattern=%5p %d %C: %m%n
++
++
+Index: stroe4.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- stroe4.iml	(date 1581152705851)
++++ stroe4.iml	(date 1581152705851)
+@@ -0,0 +1,8 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<module type="JAVA_MODULE" version="4">
++  <component name="FacetManager">
++    <facet type="Spring" name="Spring">
++      <configuration />
++    </facet>
++  </component>
++</module>
+\ No newline at end of file
+Index: src/main/java/com/exercise/domin/Cat.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/com/exercise/domin/Cat.java	(date 1581839218992)
++++ src/main/java/com/exercise/domin/Cat.java	(date 1581839218992)
+@@ -0,0 +1,34 @@
++package com.exercise.domin;
++
++
++import javax.persistence.Entity;
++
++@Entity
++public class Cat{
++    private String name;
++    private String size;
++
++    public Cat() {
++    }
++
++    public Cat(String name, String size) {
++        this.name = name;
++        this.size = size;
++    }
++
++    public String getName() {
++        return name;
++    }
++
++    public void setName(String name) {
++        this.name = name;
++    }
++
++    public String getSize() {
++        return size;
++    }
++
++    public void setSize(String size) {
++        this.size = size;
++    }
++}
+Index: src/main/webapp/index.jsp
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/webapp/index.jsp	(date 1581830834759)
++++ src/main/webapp/index.jsp	(date 1581830834759)
+@@ -0,0 +1,11 @@
++<html>
++<body>
++<h2>Hello World!</h2>
++
++<form method="post" action="/stroe4/update">
++    <input type="text" name="name">
++    <input type="text" name="size">
++    <input type="submit" value="123">
++</form>
++</body>
++</html>
+Index: src/main/webapp/WEB-INF/views/index.jsp
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/webapp/WEB-INF/views/index.jsp	(date 1581161549455)
++++ src/main/webapp/WEB-INF/views/index.jsp	(date 1581161549455)
+@@ -0,0 +1,16 @@
++<%--
++  Created by IntelliJ IDEA.
++  User: lenovo
++  Date: 2020/2/8
++  Time: 19:32
++  To change this template use File | Settings | File Templates.
++--%>
++<%@ page contentType="text/html;charset=UTF-8" language="java" %>
++<html>
++<head>
++    <title>Title</title>
++</head>
++<body>
++
++</body>
++</html>
+Index: .idea/vcs.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/vcs.xml	(date 1582297421515)
++++ .idea/vcs.xml	(date 1582297421515)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="VcsDirectoryMappings">
++    <mapping directory="$PROJECT_DIR$" vcs="Git" />
++  </component>
++</project>
+\ No newline at end of file
+Index: src/main/java/com/exercise/user/service/UserService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/com/exercise/user/service/UserService.java	(date 1581177026188)
++++ src/main/java/com/exercise/user/service/UserService.java	(date 1581177026188)
+@@ -0,0 +1,19 @@
++package com.exercise.user.service;
++
++import com.exercise.user.domain.User;
++import com.exercise.user.repository.IuserRepository;
++import org.hibernate.FlushMode;
++import org.hibernate.SessionFactory;
++import org.springframework.beans.factory.annotation.Autowired;
++import org.springframework.stereotype.Service;
++import org.springframework.transaction.annotation.Transactional;
++
++@Service
++@Transactional
++public class UserService {
++    @Autowired
++    private IuserRepository userRepository;
++    public void  saveUser(User user){
++        userRepository.save(user);
++    }
++}
+Index: src/main/java/com/exercise/user/repository/UserRepository.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/com/exercise/user/repository/UserRepository.java	(date 1581177303707)
++++ src/main/java/com/exercise/user/repository/UserRepository.java	(date 1581177303707)
+@@ -0,0 +1,61 @@
++package com.exercise.user.repository;
++
++import com.exercise.user.domain.User;
++import org.hibernate.Session;
++import org.hibernate.SessionFactory;
++import org.springframework.beans.factory.annotation.Autowired;
++import org.springframework.orm.hibernate5.HibernateTemplate;
++import org.springframework.stereotype.Repository;
++
++import java.io.Serializable;
++import java.util.List;
++
++@Repository
++public class UserRepository implements IuserRepository {
++
++    private SessionFactory sessionFactory;
++//    @Autowired
++//    private HibernateTemplate hibernateTemplate;
++    @Autowired
++    public UserRepository(SessionFactory sessionFactory) {
++        this.sessionFactory = sessionFactory;
++
++    }
++
++    private Session currentSession() {
++        return sessionFactory.getCurrentSession();
++    }
++
++    @Override
++    public long count() {
++        return findAll().size();
++    }
++
++    @Override
++    public User save(User user) {
++        Serializable id = currentSession().save(user);
++        return new User((int)id,
++                user.getUsername(),
++                user.getPassword());
++    }
++
++    @Override
++    public User findByUsername(String username) {
++        return null;
++    }
++
++    @Override
++    public User deleteByUsername(String username) {
++        return null;
++    }
++
++    @Override
++    public User updateByUsername(User user) {
++        return null;
++    }
++
++    @Override
++    public List<User> findAll() {
++        return null;
++    }
++}
+Index: src/main/java/com/exercise/user/contorller/UserController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/com/exercise/user/contorller/UserController.java	(date 1581835084035)
++++ src/main/java/com/exercise/user/contorller/UserController.java	(date 1581835084035)
+@@ -0,0 +1,32 @@
++package com.exercise.user.contorller;
++
++import com.exercise.user.domain.User;
++import com.exercise.user.service.UserService;
++import org.springframework.beans.factory.annotation.Autowired;
++import org.springframework.stereotype.Controller;
++import org.springframework.web.bind.annotation.PostMapping;
++import org.springframework.web.bind.annotation.RequestBody;
++import org.springframework.web.bind.annotation.RequestMapping;
++import org.springframework.web.bind.annotation.RequestParam;
++
++@Controller
++@RequestMapping("/admin")
++public class UserController {
++    @Autowired
++    private UserService userService;
++
++    @RequestMapping("/save")
++    public String saveUser(@RequestParam(value = "username") String username ,
++                           @RequestParam(value = "password") String password
++                           ){
++        User  user = new User(username,password);
++        userService.saveUser(user);
++        return "succeed";
++    }
++    @PostMapping("/save1")
++    public String saveUser1(@RequestBody User user){
++        System.out.println(user);
++        return "succeed";
++    }
++
++}
+Index: src/main/java/com/exercise/user/domain/User.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/com/exercise/user/domain/User.java	(date 1581839218966)
++++ src/main/java/com/exercise/user/domain/User.java	(date 1581839218966)
+@@ -0,0 +1,50 @@
++package com.exercise.user.domain;
++
++
++
++import javax.persistence.*;
++
++
++@Entity
++@Table(name = "user")
++public class User {
++
++    @Id
++    @GeneratedValue
++    @Column(name = "id")
++    private int id;
++    @Column(name = "username")
++    private String username;
++    @Column(name = "password")
++    private String password;
++
++    public User() {
++    }
++
++    public User(int id, String username, String password) {
++        this.id = id;
++        this.username = username;
++        this.password = password;
++    }
++    public User(String username, String password) {
++        this.id = id;
++        this.username = username;
++        this.password = password;
++    }
++
++    public String getUsername() {
++        return username;
++    }
++
++    public void setUsername(String username) {
++        this.username = username;
++    }
++
++    public String getPassword() {
++        return password;
++    }
++
++    public void setPassword(String password) {
++        this.password = password;
++    }
++}
+Index: src/test/DateTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/test/DateTest.java	(date 1581162776231)
++++ src/test/DateTest.java	(date 1581162776231)
+@@ -0,0 +1,69 @@
++import com.exercise.config.DBConfig;
++import com.exercise.config.MyMvcConfig;
++import org.apache.commons.dbcp.BasicDataSource;
++import org.apache.taglibs.standard.tag.common.sql.DataSourceUtil;
++import org.junit.Test;
++
++import javax.sql.DataSource;
++import java.sql.Connection;
++import java.sql.PreparedStatement;
++import java.sql.SQLException;
++
++public class DateTest {
++
++    @Test
++    public void datetest() {
++        String sql = "insert INTO user VALUES (?,?)";
++        Object[] ss = new Object[]{"zs","123"};
++        System.out.println(executeUpdate(sql,ss));
++    }
++
++    private static PreparedStatement pstmt = null;
++
++    public static Connection getconnection() throws ClassNotFoundException, SQLException {
++
++        return getDataSource1().getConnection();
++    }
++
++    public static PreparedStatement createPreparedStatement(String sql, Object[] params) throws ClassNotFoundException, SQLException {
++        pstmt = getconnection().prepareStatement(sql);
++        if (params != null) {
++            for (int i = 0; i < params.length; i++) {
++                pstmt.setObject(i + 1, params[i]);
++            }
++        }
++        return pstmt;
++    }
++
++    // 通用增删改
++    public static boolean executeUpdate(String sql, Object[] params) {
++        try {
++
++            pstmt = createPreparedStatement(sql, params);
++            int count = pstmt.executeUpdate();
++            if (count > 0)
++                return true;
++            else
++                return false;
++        } catch (ClassNotFoundException e) {
++            e.printStackTrace();
++            return false;
++        } catch (SQLException e) {
++            e.printStackTrace();
++            return false;
++        } catch (Exception e) {
++            e.printStackTrace();
++            return false;
++        } finally {
++
++        }
++    }
++    public static DataSource getDataSource1() {
++        BasicDataSource dbcp = new BasicDataSource();
++        dbcp.setDriverClassName("com.mysql.jdbc.Driver");
++        dbcp.setUrl("jdbc:mysql://localhost:3306/store2?useUnicode=true&characterEncoding=UTF-8");
++        dbcp.setUsername("root");
++        dbcp.setPassword("wxhn");
++        return dbcp;
++    }
++}
+Index: src/main/java/com/exercise/user/repository/IuserRepository.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/com/exercise/user/repository/IuserRepository.java	(date 1581155723276)
++++ src/main/java/com/exercise/user/repository/IuserRepository.java	(date 1581155723276)
+@@ -0,0 +1,22 @@
++package com.exercise.user.repository;
++
++import com.exercise.user.domain.User;
++
++import java.util.List;
++
++
++public interface IuserRepository {
++    long count();
++
++    User save(User user);
++
++    User findByUsername(String username);
++
++    User deleteByUsername(String username);
++
++    User updateByUsername(User user);
++
++    List<User> findAll();
++
++
++}
+Index: .idea/libraries/javax_json_api_1_0.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/libraries/javax_json_api_1_0.xml	(date 1581840809729)
++++ .idea/libraries/javax_json_api_1_0.xml	(date 1581840809729)
+@@ -0,0 +1,9 @@
++<component name="libraryTable">
++  <library name="javax.json-api-1.0">
++    <CLASSES>
++      <root url="jar://$PROJECT_DIR$/src/lib/javax.json-api-1.0.jar!/" />
++    </CLASSES>
++    <JAVADOC />
++    <SOURCES />
++  </library>
++</component>
+\ No newline at end of file
+Index: src/main/java/com/exercise/controller/PageController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/com/exercise/controller/PageController.java	(date 1581153887403)
++++ src/main/java/com/exercise/controller/PageController.java	(date 1581153887403)
+@@ -0,0 +1,13 @@
++package com.exercise.controller;
++
++import org.springframework.stereotype.Controller;
++import org.springframework.web.bind.annotation.RequestMapping;
++
++@Controller
++public class PageController {
++
++    @RequestMapping("/succeed")
++    public String succeed(){
++        return "succeed";
++    }
++}
+Index: src/main/java/com/exercise/config/MyMvcConfig.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/com/exercise/config/MyMvcConfig.java	(date 1581996678683)
++++ src/main/java/com/exercise/config/MyMvcConfig.java	(date 1581996678683)
+@@ -0,0 +1,86 @@
++package com.exercise.config;
++
++import com.mchange.v2.c3p0.ComboPooledDataSource;
++import org.hibernate.SessionFactory;
++import org.springframework.context.annotation.Bean;
++import org.springframework.context.annotation.ComponentScan;
++import org.springframework.context.annotation.Configuration;
++import org.springframework.orm.hibernate5.HibernateTransactionManager;
++import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
++import org.springframework.transaction.annotation.EnableTransactionManagement;
++import org.springframework.web.servlet.config.annotation.EnableWebMvc;
++import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
++import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
++import org.springframework.web.servlet.view.InternalResourceViewResolver;
++import org.springframework.web.servlet.view.JstlView;
++
++import javax.annotation.Resource;
++import javax.sql.DataSource;
++import java.beans.PropertyVetoException;
++
++
++import java.util.Properties;
++
++@EnableTransactionManagement
++@Configuration
++@EnableWebMvc
++@ComponentScan("com.exercise")
++public class MyMvcConfig extends WebMvcConfigurerAdapter {
++    @Resource
++    DBConfig dbConfig;
++    @Bean
++    public InternalResourceViewResolver viewResolver() {
++        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
++        viewResolver.setPrefix("/WEB-INF/views/");
++        viewResolver.setSuffix(".jsp");
++        viewResolver.setViewClass(JstlView.class);
++        return viewResolver;
++    }
++    @Override
++    public void addResourceHandlers(ResourceHandlerRegistry registry) {
++        registry.addResourceHandler("/static/**").addResourceLocations("/WEB-INF/static/");
++    }
++    /**
++     * 数据资源配置
++     * @return
++     */
++
++    @Bean
++    public ComboPooledDataSource dataSource() throws PropertyVetoException {
++        ComboPooledDataSource dataSource = new ComboPooledDataSource();
++        dataSource.setDriverClass(dbConfig.driver);
++        dataSource.setJdbcUrl(dbConfig.url);
++        dataSource.setUser(dbConfig.username);
++        dataSource.setPassword(dbConfig.password);
++        return dataSource;
++    }
++
++    //配置事务管理
++    @Bean
++    public HibernateTransactionManager transactionManager(SessionFactory sessionFactory)
++    {
++        HibernateTransactionManager transactionManager = new HibernateTransactionManager();
++        transactionManager.setSessionFactory(sessionFactory);
++        return transactionManager;
++    }
++
++
++    @Bean
++    public LocalSessionFactoryBean sessionFactory(DataSource dataSource) {
++        LocalSessionFactoryBean sfb = new LocalSessionFactoryBean();
++        sfb.setDataSource(dataSource);
++
++        sfb.setPackagesToScan("com.exercise.user.domain");
++        Properties properties = new Properties();
++        properties.setProperty("hibernate.dialect","org.hibernate.dialect.MySQL5Dialect");
++        properties.setProperty("hibernate.show_sql","true");
++        properties.setProperty("hibernate.hbm2ddl.auto", "update");
++        sfb.setHibernateProperties(properties);
++        return sfb;
++    }
++
++
++
++
++}
++
+Index: src/main/java/com/exercise/config/WebInitializer.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/com/exercise/config/WebInitializer.java	(date 1581153416527)
++++ src/main/java/com/exercise/config/WebInitializer.java	(date 1581153416527)
+@@ -0,0 +1,20 @@
++package com.exercise.config;
++
++import org.springframework.web.WebApplicationInitializer;
++import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
++import org.springframework.web.servlet.DispatcherServlet;
++import javax.servlet.ServletRegistration.Dynamic;
++import javax.servlet.ServletContext;
++import javax.servlet.ServletException;
++
++public class WebInitializer implements WebApplicationInitializer {
++    @Override
++    public void onStartup(ServletContext servletContext) throws ServletException {
++        AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
++        ctx.register(MyMvcConfig.class);
++        ctx.setServletContext(servletContext);
++        Dynamic servlet = servletContext.addServlet("dispatcher", new DispatcherServlet(ctx));
++        servlet.addMapping("/");
++        servlet.setLoadOnStartup(1);
++    }
++}
+Index: src/main/webapp/WEB-INF/views/succeed.jsp
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/webapp/WEB-INF/views/succeed.jsp	(date 1581153620796)
++++ src/main/webapp/WEB-INF/views/succeed.jsp	(date 1581153620796)
+@@ -0,0 +1,16 @@
++<%--
++  Created by IntelliJ IDEA.
++  User: lenovo
++  Date: 2020/2/8
++  Time: 17:20
++  To change this template use File | Settings | File Templates.
++--%>
++<%@ page contentType="text/html;charset=UTF-8" language="java" %>
++<html>
++<head>
++    <title>Title</title>
++</head>
++<body>
++成功
++</body>
++</html>
+Index: src/main/java/com/exercise/controller/AjaxController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/com/exercise/controller/AjaxController.java	(date 1581841998614)
++++ src/main/java/com/exercise/controller/AjaxController.java	(date 1581841998614)
+@@ -0,0 +1,62 @@
++package com.exercise.controller;
++
++import com.exercise.domin.Cat;
++import org.springframework.stereotype.Component;
++import org.springframework.stereotype.Controller;
++import org.springframework.web.bind.annotation.*;
++
++import javax.json.JsonObject;
++import javax.servlet.http.HttpServletRequest;
++import java.util.Map;
++
++@Controller
++@ResponseBody
++public class AjaxController {
++
++
++
++    @RequestMapping("/Mobleservlet")
++    public String Mobleservlet(){
++
++        return "succeed";
++    }
++    @GetMapping(value = "/update0")
++    public String updateAttr0(@RequestBody Cat map) {
++
++        System.out.println(map);
++        // 操作 ...
++        return "success";
++    }
++    @PostMapping(value = "/update")
++    public String updateAttr(@RequestBody Cat map) {
++
++        System.out.println(map);
++        // 操作 ...
++        return "success";
++    }
++    @PostMapping(value = "/update2")
++    public String updateAttr2(@RequestBody Map<String,String> map) {
++        System.out.println(map);
++        // 操作 ...
++        return "success";
++    }
++    @PostMapping(value = "/update3")
++    public String updateAttr3(HttpServletRequest request) {
++        String name = request.getParameter("name");
++        System.out.println(name);
++        // 操作 ...
++        return "success";
++    }
++    @PostMapping(value = "/update4")
++    public String updateAttr4(@RequestBody String jsonObject) {
++        System.out.println(jsonObject);
++        // 操作 ...
++        return "success";
++    }
++    /*@PostMapping(value = "/update5")
++    public String updateAttr5(@RequestBody JsonObject jsonObject) {
++        System.out.println(jsonObject);
++        // 操作 ...
++        return "success";
++    }*/
++}
+Index: src/main/java/com/exercise/config/DBConfig.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/com/exercise/config/DBConfig.java	(date 1580202282978)
++++ src/main/java/com/exercise/config/DBConfig.java	(date 1580202282978)
+@@ -0,0 +1,31 @@
++package com.exercise.config;
++
++
++import org.springframework.beans.factory.annotation.Value;
++import org.springframework.context.annotation.Configuration;
++import org.springframework.context.annotation.PropertySource;
++import org.springframework.stereotype.Component;
++
++@Configuration
++@Component
++@PropertySource(value = "classpath:jdbc.properties",encoding = "UTF-8")
++public class DBConfig {
++    @Value("${db.driverClass}")
++    public String driver;
++    @Value("${db.url}")
++    public String url;
++    @Value("${db.username}")
++    public String username;
++    @Value("${db.password}")
++    public String password;
++    @Value("${db.initialSize}")
++    public int initialSize;
++    @Value("${db.maxActive}")
++    public int maxActive;
++    @Value("${db.maxIdle}")
++    public int maxIdle;
++    @Value("${db.minIdle}")
++    public int minIdle;
++    @Value("${db.maxWait}")
++    public int maxWait;
++}
+diff --git src/lib/javax.json-api-1.0.jar src/lib/javax.json-api-1.0.jar
+new file mode 100644
+index 0000000000000000000000000000000000000000..d276c793c70ec7020c9a169a935541093e2835de
+GIT binary patch
+literal 19754
+zc$}rY1y~$N@;;2a>)@`z-QC^Y-5r8Ua1HKmK|*kXySoJl5?liW2?Xa)vUm3j+1uRi
+z_YKbs_S8GwZ&z1WmyCimC>R<L6ciLtol~k1&`%FEATS_VQ58X2NjWikSwT5TF;Qg|
+zI$5!YVIUw|C2jd`1~gxab$%8eOPAm#hoLA$>VAn3y4=?I#caW9>x_EPyKfCqaA5ei
+zSznyS_pwlim>Jko1q~bH8DSjXd~}bekqE0c?sM-C;N&>CfSAf%g1&7FAW77zGU)Yf
+z&3(;%&QK<R!*kzn(Pz8A8V?N>Vqno#zw(j4*q&1TEt<bdh}aBtM6)6fv31Q0(=q|e
+zJW4>%cJ~MVPl$XGzOwNE+KLa3Eo~ods;HsR{Y!_f)w-!9K+(rIJ_#WiGub7(Z!1-S
+zEzNDeU#q+4!6j#}v}8iuCDL2enI+%6*E*<J{!sKXp8MQqb8q;i`|N3bPX3OZ-?{yE
+zJazQz)r}-YCc^ajLM(~m2!PL_8Rx6l{98>xMgd33w<XZJAlM145-Qb-)WhH@WBns)
+z<=qfedHg1)^ylp?1{<Msz+L@Z^LLkksaDqxx1lizr*%YH%umg{37KB1Wzs0STecHq
+zyA2fNzSy51rh&WmAu^)h>%a~QYHc8XHqljvpT(nVQ@K@<>K)W~4{O1DeFv-{4GA@C
+z)?gV23<LxY3IwF^m&*$M^!(4Vf&zUP{QhT<fBpNf1rdK1v^8`ywfjfn*nbwcGITR^
+zr?Yal|7S>4zeW1LA88F8EdLQO`#%A8u(zdiaI$wWb#k#Zbygj&hUsQN0-C&U-^i`a
+z3r~Z=0~1`v1>3cDj;11lo-ds3nE!Bb+KfYiQFiEXV}MavGI?iK?*JE?uH_UbZNo>p
+zr`O?1^{PL=A#f`2!&M{S)Ylt0?hy<p?D~T)X}j&?{v<c9+2(C9QdSz4d466+=o9eo
+zGn2o9@^gI}ci^*``TsIAhJQLUcUzk=4O{!oM&yTM{jM_6jJmkQ!-i0{4+nIz-jWy}
+z7pmIk@m~?<k}dAgk--q74{$8|eSs@gADBL_56!=>(r`4xABW4qa>Dh#jfXlLb?P&{
+z8RtBg!|R@w=;zVxaOR_HfBAUejT7@~wei?OWbKQU&@lz9ljD29#Gr|o*(PEFLI0K$
+z)4ijcmrt$0{?WF3Oika|QRZ?K{kwkV2`&9$o0Rhlv4n!X)K*SjZs+x!_a^Z(5)48!
+z3n`rITFA{>j$Nf@!z7qbyS+$a9Bm{=Q)h#gElPyx0}XhZ4szRigg=qMc2tScb+~A{
+z1vH2l%Lr;gABXpj+0o5I0dTV!)krDfj1iT)$gz8`Qr{pV8{-yyT<Jm_$*!m8E-tEN
+zG`(rO|49TdGf^#ACW8hNc+-Z|uD7N|9o<w+=1BPq7XFArq%{C!%Sw2FlN8?W0?C%R
+zCLlNHSc00BsxyI{=@O+{1~pq~OA>-pibSjdDIS>Gkp?E*!YX!4Ntq$nApXcE-%3@e
+zVhN{$+4cC=S};k=vHsNP^3W%LVpclsk~sm3K==yPWPSf|e{^Y2MB^^ggylwNp5`04
+zw(|NaF!b@Rv3!TciRrk8`G{(oU{ZBhrMrm$nCv{bKx{pjP;sX~d{>-fuz0SF7Px$4
+z@uD}Tr4GIkdhK>EKRXSXW0s!)Bll3!ClD$*LdQ7D4W@!5VfHBE#kSch|0YwGMF7VL
+z`9e#zb)R97C#CymG?OSDBO_)QNLDs+D8)=1!=Z;%s&=`!v$^+CJ8QB;7JA18msm%$
+zu`$3#=yV5WP2M|<kwZ@EM?j8P(}B$JwdhR95A&v?s4bra{8@x*rV>H39TBudl1>mO
+zY1iP6su#lS)Pu}A$HM5q3p4wxyYzs+Y-7AOfkv-ADxA*ll<e6;Hz!tOqmyV;VM`<n
+zI!hC5;^z@!9|Vg&yphA;j9W?+7%kl?$Fu8EHqa8vP~lci)4pM;*fSikc#yzXN@o}q
+zQjrFV*?ukep+!lWDvh9YlS^&^(_0Pav%p8mmNqCkYt8CKF6-uSOCkk11>T0RvcB<a
+zLPO(Gx?1jD1x7IthFJBeX%CC*OAF?Zd(riAyk>P(gESym#};{3^b3WX;CF!5#Vqj>
+zL2X+(JYSj_{=I%#DKvL*M{%6+4`5A{w*Jr%w4nedgaHvYl{EOGBHAl$uU-fyE1voQ
+zwl-WJK28CLLsk?kP&;Vp9(CV<W&ia)WjaCR2J0}o^{=^cD}%HyUb$57^GIr2S_}<m
+z=Yeke{a+z9aUx?7oK(ui^pAfS4xu6{#&&Yh&Zk;Rw}mPs2`ICC53VYbG3;x(uX6se
+z!GntMr9$&NoER}+5eu1htk|-b2znq6kfdMJitvLQ8Vs{X=O0|ox*ls^MofSfcs%60
+zSG29zwH;{}eB1f@b@XvQw1pEuKD%8y?am*Nw6Qx(^GR}vy4{F*`ps#+QOh1SFJgPv
+zWDq84EI^T*on^Z7%iE7u2)QjFz!h<t8oM=vcAH2iZ8r#TcUDb`y$!ATaUp&3QpEwQ
+zS{8LupF+&{1TLn+oXIKqfQlzug(uFL)7)b}c7B0+TkgC4xnz@4Z;U?MHE+{&phs({
+z2+Qxt+Mtq-a=`&wl?-sKRuR>XB<WAf?9HDO_ukJ#I_A>^#W$1mkua)5pn)wTPn;{U
+zfwCTW%<bh^W-zP(XR08oUX;x{-o{9?o#06U<RFB*hBi?eC*)*OMn<#x@JRc}n`@M-
+z5=+};aLl8GVG-b|GP9!kMP2W{g!uU69I|oXVch(fqRLkon2hu3_-0Cy0iefsuf2P5
+z`<ZU?6Z*0BHea;UIhApH`yFL*(b%BfY>SCI)5dz?4ab%GgbDhq@kJ@}Evb}CJ!qWf
+zz;o^)x@*9AjRqFYYLRm&b&+{hH@aKk6L&lwePs8$<&F`xAJuSCQe*zuNjAOTFx|S#
+z<DS5o=d;vR9rU4ohFy5<5RSFnoO1TDWR!PWhiFCC?*<{pm%QlVqd3CaQMorw#Q~N-
+zv%fIQ*t|@Kb9UWmW>veI<A%^gYt7jik~ukZMVGE?OoHsYcAU4%Q=7*6+2tzui7?r|
+z_*_DX>J^~G$`zS6jqi;f*u~a_SHFU;?tSB!u2o<AqS|8(f7wlZesxeFUBQ3^^IEu!
+zRmDTKEY{gKm%}=+zR-w}y&hp!6v3tc5&nY^zt$S!)hfy{`|4x<3hQS1{<;3g{a7bE
+zkM~UtNB34o2-T2hDZ^jAvV|hlW5r4~Z(3HtVoa+?G%W1C9u(-~;g#s|cicjEWDhI&
+zJ*}AoV1sR_7auOPi1%%S8b7|fUW1kYtJiO8_CX}1XM0L}pnX(rE75$DjBXDW6=gEy
+zLb7O$1&CXdLaa*}LvXln4i~>oJt~54O!(`D1z#6+?`^PxpmG{GrrwOfzVnreFN>JX
+z=7rNtxMroeJcY(YPlJIN!;Dqqm>=T3uQ9GnU86q=7jPW&zCFS=)a=7}Ph<8nt$*yb
+z+89A|x&$-Ed<W**pn9i&1i$j&4h0A7mMf4${6XP<O6y2eZO0z(9P~cy{g6!C&bL~H
+zUGN^zO3a5^yATpxJrPh-li3Hutiwy#iRNQgJY)HzNcVHyn#7aV#(}(i*fOcONKkRm
+zmFm3#0(B3^rAgO@RumWc3IfC>!k(0vp>1D$ck#tx@z<J<eCKDFvw=$`4OR6ch6Q<B
+zCQS2oGu7o3Or%g`<cxSp*?KH8*<A<^%_OQX%CHkgx)A1$USqHCt$z1In)PHEsGt0-
+zRlx5&EQqJ)4{zfi`DL*Gk^0BJBKmVtsizk@V;e(f=c1&KO0xoJA&(Fy22sNs5wMNx
+zaMXfGXpoMe%L|GQ^9*8etfb0B1xnk-SJ-O%(M!Q8dhXkxS73Yr>dCt%M&y>w1`thG
+z+?M0tzU?Q>@UA|3U&G|$$j4jsUy$0Zk&jT007f`Qz(z<%&_-BB;6`YZmuPBfoM~Qa
+z9M>#Mula%?f>}Y*ES*7smnrXS2Bg0jS5`JyDlyI23@-ARX)_(&wJ5fn9l~zX?5V%v
+zO?`Wstvvz~T@cw1yP4G9c(`x_A0OqP>?+&COacG$qYHSml5dn9=S`g@59^8y7YwZz
+zTH98w=qp?+U4DgJK{0SoX}9?!@2-r~>kHm;8f}Bn_##<M<#wyZVrzGVie+Ujv+?>?
+z)*1vNxw|3)99f=R@EhqERB-$I(Sr65a$TqkrEEwRF>2nugD7>xlbAFbCvP+P%(muB
+z6+2JqYGUq3wbt~)a2#N&^)!YaKZlZ>P6ljPk5^&3NX^t>GT{aG&QEB-HmsxT2-y`6
+z8xG5QzWEB>!}K*p8v=`L=JZiY(GZXs-IOakZT%7}Bj~;$Wrm-TSi^>kLuS7ok+@);
+z>NCw|VxRxco|fU!1*^3_6D7Ju$yr3XO?rXrJHjkL)v1d~MzIlBiq5=7lTMY>!#4}r
+zij92WB3+qL`gBeDtwlBGYABHRm|X_M%YO6Cx35vRSX!$=-kwR0bAYp3$7pzK&N@p_
+zkYG0$i-RDt@^l-+dsV+KQtctaHM5+L6$=ef-kWp4Zlm$R9$%x8?g()nwBUFx2#@I~
+z*<-3R#SmoJ+)@~|Cr4+h_co>T(_Yt@c3)(ltDc5$-siLRg0B@@3vdYe;lAb9mB6a4
+zRFg>}_Pi`G*zB&}LGJR1stcm&g~+KQ@WoXb*>y%pm$||Ho^&Dxld^Gl9nJD32Uq?F
+zFZ0AJ`2Fa+=MDK0z`V=TE90(r8QY`Tx_OfH$L!-h*!u~(ru^;I&+C~Ux%vr&hj;f2
+zl+n(G9r?PvU4#5kH(zgpMN=3vXR#bSl<97H4^K#}>rilaRCG3lW|s1P@Oqc>?M_pZ
+z`M`!XC-K^TIDINl;XK3iA+*MPkEhf_cE^v}D<merxkh_y_@OMf26RhiSNo_{)$Kty
+z;2hkkSej(Pxtsu)bnqIqp}Lw93%0rL%1IG|eXvUsrdV1c%ef%2)}oYf7dgG<fM53(
+z_WL#-@WHqZdb+TZ!~L(z<1gD-(8<Zr<Bz@Usx%_kEr7-wxG=1&pwRiA?k!G6V_^`O
+zY!oXPCJWsH`ZNn!z3dIcjWyjJ5dW|{H!WhG2?mApL=%PiaaPW1r9IHgMl?t24Vm7i
+zFxZfIOR$Od&#h5!`biBeBoAc$$~rz1oFxvQy;255gg5Sb+)xNJi;hs4u5&}J_J^b#
+z<2Xxi7_Mo?q|wE2qF_qgl`ZA1fAbD`5e{pr{Zi(-YtBbMTzi|L%BIQwTJdCgk_nF&
+ziZ^h*w4i>e{CHVm|6Q6Zi|qb8&VJRJBFfs)3(cKIFZ^#>O7kP7QUS{<p>DBcFOm$k
+zl{j}weZMp}<Z&~yZ!A*^b)7-x*)m&5#|*VAkptxNu_((YJ~F@$ClWO0u`}Y+W{|6A
+z(_gV!8I%;!=H%622j^8&!8Sc0k}xos?AZ`W6Evh24F~~2i5@zP5=~V56Az#a&(=yG
+zz)`zY8oiz`U)a?U=IsKF3AG?y*jk7<p2gwDT~FN{BKW>;pFP7|9e{y=n135=Ao`1S
+z6LPh*F)?-eWBIr*?C1F)ARtH}7~LR{-5?ajAa;5a(ZnE>;d9>h*7U;Mzumaw@u4R~
+zPEJ)$x2g!IJJe7~)Yw-^PfLi`G8r2*fSP)flaQM7jzC8#F)c+-0dbb@ez`Xu&gadj
+zOUmrl=yES^{DsF(QeiQuDb&95<O%89-pDEx%x<ZCC@Mq9kOqBAIRuixRtTc{27u#6
+zPGVBJ4v4a#L<f9`FB*7IT`hS)Y7`s_2QG|CH+rVNR$}Hsa$3UhAYp`E2)+a+NgxZp
+zH2@0?X$W$In@tQt41yd2Y0VIrTpj`g0)k--rs!iX3wPp<|8%B8I;@m)pd~(p9%T-q
+z)OnyKFoa+(d=#9JKzz6$;K#w{kW;7w`@}5Zx6G3Knc07lDrRWxV(;YfE4RLG5PEJ9
+zd}0vmTlurS@hXpnZ)dkq-b{~XCe9LzL4d={J|{aMzdJon5GsGFx`eVC<()jfGC>VU
+zE?fK8S(M$o*1A!biPp&t6)_0G5{&!l_)%P+)n1TX;_<c7udTiD)5N*0*v+l*K^gzI
+zEOr&9kh8u2p$~MH450?ws$AR1Nzzxb2wwt+B#<WkRso%n35rlA)IBXaE+8%-92hKB
+z6M&V9r2zo=v%CPsNi{QH0~&S)F--$B`qS7kL_+=`E!c9<bL%@Lz`r96|Ieg}x*MB1
+zxLE$%EpUw;lLKKy3zj!bRTNQhnQWZSdgX}no)D)X+{}b1$OkJU4~)yqH*wxcbfX*c
+zBrocH@EU=e<D!?>mzVOl52rT}Yq(yb8Vgf3pF3R@jH|SjhU&)F@NY>TdfOP)^X6rZ
+zOS^X@bGn+N@WF)pQlwmJh6H+f`2fnr2jaj4-#lnsTP3vi70BTrLs&1wBnw-$<I61x
+z@s+Vk$pe{@CA)<KubAWW+Peqe%h&_NCp=Rf)uG&zk%n|NyA%$^G;zbMEpZ<moQk=n
+zC_Cqr%oZLenA>(EeRE1x<a*Cg#0O_W50XG<IFv&3+4?vak35YbE{%@oB_hd}@`qvH
+z&XlrM=HG?nEl?UJ0Mb?Us_ZPpvfbW%;>aTUhT|qKiwDY`nL=wg4pJ<SZi5xMRNQg{
+z{hj@@S0&I)Pt0S0{EmH`KeI3AYHRdwGvFF0E&pW2gC~F*S|ed1DtT=zHj=aQp?mjU
+z^#-?CrX{k?ur(<6*gLNyo`_@7_W*_T_Kl`+ej9B%zk0a7196DN!AW6zXQRVB+vA;1
+ziEN_7lnB|w9%7YRqD}{!7fdB={etIhV<o_fN%mEnasT8es{Rdk!(3-kv#9&76RHh@
+z<>)4@=9evJsd-)oY*^8vTJB1RII?U_sOzDODUaLfOxtRzT<V&sV6#S_<9VQ$qooj}
+zTQPNZ;M%%!&LT0P^`kGeX*}9n<uPYV_~au;F<<8u1~ZS$Y&C`P#zoKJP#H!i;lv#u
+zN5W<G=x~h&sIK-J8Bk79&JeJ^fJ4Ux7J+Rr`%o3qY}Qj1o@}->DJXspph$nSXLadN
+z?9o1+$LEtS-FWpQ?03h-aZdIBg>iW!D^p{aKNydWACc<$?gLMyFJx4t%z3VcV=}Bs
+zg+VnVQEOp>W3I@KASo4x7h+ARJFkOYDQpb6%&MS31>B9MJ#Omkc>A{b0dWijMC0MK
+zuwB|5GSBiLugdnUaYbC=^bAeir*=4qpLIIlIBr2^d%YE|98a|wubek6!MSwgz$i#v
+zuY=-YezTXI4kxM-o1LcobyOpk%`t>&ihs+HjuX?UagYH+gm!oy-a@3}t%+`kn^<dx
+zj!IZ7v@n%>tT1BDzMzxg^-OkrJofReUZ*iSG(;Rz#{3{45u40zCO5)opXX$EBon%D
+zl7cSDp|WIOieF_)V)-UMp6%h&0}WA0+GwAF#Y1IGUV=LQQJ0Pn251k6PbB43gSs@F
+zbQO>i&WP4XiA6<zaeWMW0epq*TWsB#<{0<_+KQts87#JojzHRqr5|^ntkjWNk*CEl
+z_^rhz{;S3Kdxs(7kHb*pKC`#g<$f(bf3(%bx=JG0SIyBkyB#wYN_vz^wth|o^HP3T
+zN|w%%dTdlulD5Xo#G%U+Edol=*r8d1pS_w?c$JEIg}IWH6|W>2My#oj+<b?82Z?PM
+z5UH4LvVTS_odT=boDX$i1X&EyF`bDk20=n|18s#!NPL}pKx9$Kk1WQ8flj7|VoPj|
+z5;inQSQ;Qqr2wz);A^SqRHkhvM@<q42%+*M^ofFFy0S4cK@#A=CGP1T>>TXu1p?ur
+z>7*Ix?Cu0A*34tUNi++c##Km1m2wuev|||S>4e=r7qs+cpzS1tstb5JeI%F|q5in;
+zLBkl}pgnPX_*;(ui^40J8vch|)7QK(-2zC#s}@Eq516lBK}uj_+Ej>CAqgr}>2DH4
+z69vc;d$PhJuI2T91jC^<GxPYeG%))4-W?>>crSN1_lto*Rb9M!_w4!mxYpr}uo@O*
+z9J^2*OhG-1dcww##Vlg<t)L-(ZB4iaxW-wnPtcow?_2=2fgEFKdB@k{a{PtC2(w&K
+zng=*`6I4<YqxRi<6opLCpaqc{<d~<rwi;4~)N17V*+w4-k*suF`BrMK3>NMPS=JJ3
+z!__!->(U5a8s{hPe-NTEO8__cG+o-?o_PO7>HZ+(nU~-r*ChqYh?Y59Z*5)SdAg;k
+zg$VCn;ZBA2B4TX=vKL^S%u4m~?OvtF3FsZ=>5-YCpp^5V%+8q1r-?7~?EbL0#T*ih
+zW&p`b5d}mko);4gS<5>cx(=J}i90i5S8E>oG#z>6AF#}_UYgFU4uYt**+T2sBZy4J
+zQ|kxQtFA?cX_xhD1qavCi&Y*PmjYrarbf#RV0<a&Ot4MFw2`Uh&ubsgN3LjsK4fAr
+zs!dE(QnHNdY!_*zzfz)Dc_U2}c%D<s)#uRcSUuO{FzdR?zbzHQ2P%wsA&C-#M=D~q
+zY+Jo*5W#x}Klq_1cEPtt%<nscw_m={pFQ#O{<jSN7nM?Wak8{C|ARW+*SrX?zN-{a
+z#8oKyqC1EMX>~md<5a3ftj0n`BQSKp;OkQx4E#=EEJ#X~h%9!G+oPql`P);ls!ojo
+zh0s!C5eDzH77x#GpYGn8mwAoQ6e!hSW{=}14NcI)SV%@6!lqre>tm}a(yX0d5EmEE
+zA=dE+PmiQr#sz}JftPR5K$n@?L+P?pDapU1N7mk9lis+Q@wm=(mTKZAx*h)(&tO%2
+zz6bx6Fkh$v8Z7wru(dU|pl~EkHkxM<9w5nW%J|jfZkfT!j}+p9H(dPi(}b!1sT=h~
+ziL0@TtCQ)kR!q(fg3S%W%?$!U4C39|-E{tz%KOpGC%=)Xa^tS`$&O8L#ZTv}w0*a2
+zVi3?ss(Cr!iPPe7<|ar$lKZ=)J4K&wDNKvVQy7@Sa!V1uTRBr>69W?i5F;}Pq^Iw|
+z@iK64f9wbzN1t@Zr=i6I{ciBMe;&M=p^d94DdQhQ4_217pAkUv$#C85b)BIuB%)Q2
+z+85`uSazZnl0cUbwd5=u3xHj0Ebr}FAZt*3;R|FQa~F#1FN}nXq;stpR$UvBj}%a}
+zl9iVA?Q-n!X8w!)D)90^HZW+0CXKQ5KtlkH+fG-tu|grPd=gw4mlfABV<7=YHY%UV
+z+O|}rAote^vL2(J(=ExbWwf_%@{g2AS5Iu$8$?#aeb8sS-=Q-2ck!I@eB^f#MUsd}
+z#O6H})6r_{{Py+@OMMW|(AYib@ZliCsaz#pVT^9b;ezP`rMj8$0H;V?awW<7G~>uN
+z=|`vF`ReR?uW1BC>WNZ}j+IEV$NHhFNx0zqGYy>*6ee9{7jaQ#$QVkbo3W}d?sy@u
+zP?+-pqT$^ZH;Svt@|l1f9O<_MrL)Zg*+)0PMff9CpK~%&LoM?WBB9Ka%<}y|lS^qZ
+zI>K7ds?s~@hHM;SFww}S^i^Gc$wuBC(k$qzdg$0OdYv69h&jAZH8w?fx<wmnIyJmu
+zaRIwP!K5@el_~cMC6Xnh0E}iGdqZ6?n94ynpngKaC$rm)qG}N!eXp>9nV6ODT7QXp
+z2MY6nsBRJQq%zeQK+L-ay0{H(Oo!|Xji=sw!e&SpGa13zpyn9ZXirY5Mx1c-4q-`M
+z$Q6Yvh%a^e#!jf5Z_X3vGfaE=8c$9d-T6IO;tR@wEK+OGmkArjr`INhd-xml!jCV+
+zPp5`|+<f294#ML-xm~NjJ&FEO&6s{sGubCK<42p0#h@%gOGm^`(ThY<QZ39!D<t3Q
+z1h<`5-7q*b;)Z&F4$}u32IdHQ4GI!-N7?)KPg+*F3Up{V9~52zr{*x$>57VFGZARK
+zR4Ab+Tf{O9K@DNYP-w@Qjk;pC)~A#}<gu0`6;hPGIdpsfh8BxOWTZ%<Vds7D5?Vlk
+zH=c}`E`<qDpzD?g6NiH+Kq>;wiuY8fwaP2+%g1jPRxt1B-(Ox*)shq}Shw;dK)3;z
+zj8hD2HPYenc9BG-_&&p?#As6W4>i1Kjk(YLkZ@$t@iolqRGXLVx>7bI*pqZoKBg~?
+zj%Wql@TCfi>slB{oc?Q&fzJ$Eb*adGlu~GBD_<aOJ?0g!`l@@&q>AS7JZ<L@sV+3c
+zbRTECd1zo&7eqM9SztLc-z#*M1xstF>%!mkX6CF2g>3KF0OlT7m^W-Pd3a0~uJoO&
+zr6>9dVYj~~?pVaSpJ5EvSejC6J%C*XM1f&g%Jp@rYvg~#CNsd=&D8@(FYZ!>m-7|b
+zxJSDj17qXtSK?>6WHhC)&@I0M@{88-2s7E{zQP=3gp0#I0X{lQb!5bNz<~IK+(T$K
+z{(3T9Q`5RpU>VaG?M1Al&wS|0tPuQ@nlV19nTJq0<D4fJ4t9INI!{J6-T5w9qBZ3}
+z5{EUa`sPN`l?@My3*v$F%;RueN9_&dcQu<J;Sc!#p=QkgR<jYi838oj1jmj4STiaX
+zL~KkA3?hXOQlgfcg~PAl(+h?FP&2+@zd;ZUur81;lwM5#E1<bU<oR*R2qCcK9oOA#
+z=G|p1zw7%4P=A~SHUk5aKr)>v#}5J!8P019ER;$S%}&_pc&d2w0Hyaf^9c6LCrV92
+zxksK9@rHSJEoUW<g=F`}Q%;oe<zBYyEW!5T*5B<J-gkTEpu7Ktix`SjG~y!LojhB+
+zt<$-}YnC;5CIyH6C1ov1kGt#LhRVT$(O^^x+~=Y*n>~(DN~JSPeGZpVB`UcF+;z9N
+zw-wnoq1@Y$TYc6S#6y0zOrz{VQ@-Ama!J81>R>BzmSvs5;6jziHw{aMgD)6KA`}xT
+zqeAAtEjg{moP4bA)k>5qT5?{B!BjZNgKPN|9?qFcZdDcLkj#qek;$sqTN4heVJg8#
+z>@1?2sw*7QXQ>ZY{z!)%cf4A`ehHX+P}j4W31r-p;^ZwRWsR3F_ej@dsiD;JfW1s7
+zhc+pd@9Ub-$o+&%W`Jyt)COBq+{p?)_lfY-3g*@oq&&J>1v%J9;v+P+dRb1VKCwQQ
+zP`NLdUnpr0QYkROB;9MQ+UgVg$<r)=Z|`U@vKFIwEqW%&@i}7zx}{W-dZ_OInKb7g
+zCJosdroCv5CndY#+8SgSJ#kYhvp!~|`dY%9&JMacbWeJQU_`O8_U?zSan2j<5<ltM
+z`fqiO^sjX7$E%8m!@myyXk}aZ83h2Z>B?d>$fmAA6r%#00t8gM?OOk`i$<vCdoop2
+zWwXBcskAnvd&~zktZ+bd2%_(qI986AB@zjU?OA5FSI+M8`LfsT`FzS3pyb$dq236@
+z_YT@Z8r`}CAr7yD8>0*fWXU!9%c2-VteHUIzKj6OQxlO*QsWuB9CXFP47IvJfsa-4
+zVyD5~N5tw)F;+WR!6`YH*go%<O<APE0~5IpEHHoSbHirkZV(K3BbS5L3+~P~&(5?@
+z>|@a<ME4lWcUDC4IqeltwFafBMV5`!2dF-8NmX!(ne9ZaVG9uQ9DO0**T^+Y=;3<A
+zx-#>6ia5MwrWx0B$H|)X*xIVtagF0U*1#jkbg1Rnmu@oFbF^OE_-z_Z@)fF4Rv$~W
+zWhNETZH?zmoF6IU&x1_0$5?@d&1q62lS`Yg`}4<J)9Y<<#?-PBb&%PJD5zE6xbLgj
+z_S+qi(>XPZN#E9KmFqFqVw^Ad#IsIFq07`{psB?Qs)1ywpLmOcGrJeAaoKSg0t#UI
+zHK3{(#)V>op)rI2MXZl(vM+O$Dn6Q+5u)&ZnB19*(X@<T52&Sq(%@`!zEkRdeCg(g
+z5lMl$AAvaaNJ1f=s_E}A+T|a(i2#9@>A=uC$v?~%jwa&H7;FjEC`BVPh_8>+P2qyu
+zbrF~9Z;i(5ZI^Urj^uczKG`MCeM>a%8*&Rp{9^B_oKQ-UQ?7?*=ZeRcS(LmQ3bW0h
+zg&UJ2$ow(W3Hp4L+la>;m<gSpL(W%$;_&(eJ^vF$69N%I=SaBxR$&5a-<TvO#R|Th
+zC&#ID=2xd_3g_vGA^%4X`$>8ql4Glx;JH3FF4mP5v6N!3#l0z)(r7)|l%>6S7k+qn
+zD@deE`Ad2k-vG4c*djXo89Kf`CMlLPIFHs|*n<z-UmJola8nq&<pR+}mb;R+2JOG^
+z3Vc}8oZhEh!2$jcQxiY-!@q7;-%}F`NW7RZ!CJ`RQ#U}ODhm?5MZMx-r0Ec-9;9@z
+zpJL;+;Aq7jdsi7~WJnz=2~0D!p_+kO8qLkdM>Eqt-Co>30O$H=MiqjDr~qIZOl)4n
+zipgp9$AEZjnV1|7FC<h?AlU)ba^|xMI08K_ms-_p;0D$aKw0CdU3JYR_V6~R+=pLg
+zzRT*!?|H#R-tMN{VE~mlaY3E8xO1H2yKiG>WoQ;JOe<vf{@_xkWeka6cbB%uZdY6}
+zPSHlQ*tVGh?!o4rU|G>IUcLULY=-*HH`!0+ShA7CQuRw;>fJx0$(iK8But;iP&VgO
+zi3=_!j_A{*0!Npw{YZk&*wz208g6Pe`dtRzCnv1<$49gfgQ+EU2^_;1yE#PJQSoGQ
+z@>7PLJbhwA8qgr<w+f^|szz9IgM7h=8`AJycB^YRo%}%}Y6kvmNKBe}z}=NdFWcnI
+zg9?G<YUpP#6NcFbzZoU~2xTiJ$?P6v3f_Rp%V3k>tRw!&5%0&sc|KibBL8WWOx?-S
+z<v&4#*cO;>20-w{YWbY>=e69mcagyA6v((D4oEI?(y_@#L=Ad+V_lFZdA+24qM?s&
+z;{!xn7rs2eqm$=T7sxkZP+h9UMH&)AUxK>a6HZ|}st<KC7qnQ7M=897M*NpJP$eY+
+z4{`Oz3iG)^Qv`J{Op_9m&{$Kp`ZOIcHT1jQm6#B#S-vY&n1RG2dBYVr`50a%D^%#3
+zd_EKBLom;*q*YZkzUxTG1Jb2rT8`*|`wCQ@77VdH4W4BTZc+&>ucA44{D+zMo=yqq
+zf0``wKMfiDLC1d!8F-gk&(CRHOe;@JdorxmZxkt%Xn1NA?gETPYskrNiEpg&@BDoe
+zuiR>@2pc#}$j{Bl?Z2I0zyrN^$nMsJ5rzQWPZFp<g-9}I$m01|%)o3$>qpGMFSmRO
+z>twD4p%Ffn$h8emg611(zLjKhWp@h9HP1%CyF4|HmzRBeMLyK%fg_SE=l;cOFRICu
+z>6sT{;Ienr{dQlTYC@HB(i*+Z)?HOD$!S_E(n@`$RB$;H9J_b7E1P7*@bI#_zh^D~
+zNRNM4$|wam5J81P5`ZfxRM@=<(ZX8nAk>cE#5GCbrd8WT|D8fl$lIgyCxV)OOCjQO
+z3Z4I99V*eE#lNqDf|I?Q<$q#XMe5etIHG926ku#Ygk%byc}aEXvXrD6G|7>a+tUz2
+z0z$%qwk<ZvRV;`7V<8zS2NNgydzdAc9<vh<6h1u6IPqhBU<WCj&f~3Ln#N4b&*u3%
+z?h)4TeZOun#iPu%xkteB*)*)fdJlzG^0@ExIk&C_(ilp=+7KL$WGg{wAS-O!6POOf
+zqhsYeJX<dcg6k>z*mS*5QC+|LqI_g%?{JwqkiX%@myx)rw{J+GM`pi%1rxrF%G;&U
+zd>`*bUddD^W7TXX%g6#QED7-~DvsD%TxRBjyRW@8>-<(l)NmG7M5g3$asS1uDcd6p
+z&X5e^NkbEM^SwA7wMd#tlRlQq`a~-w8TkeV^F7!QZ2yd;C~xo4$^AiJa*|!Ax_$&K
+zJN3oQ5LWxGi`nJ8d^6gyNoe<vz)p+WOd&L9jb@-{$;siQD$e@Kv#A=yvC_4GW<39r
+zqVyWmllts4HeAyQtts8KxvfsLb%Hzf%%Nu6wb?jqEEcnR3K~t1CQ@@zJ(Nq*y$u>$
+z<|{PiBwANdHs@Bz9zpI`W+G~;ieA^BG=e_Wl0ZRtbm-@cT-bb)f|4=TOJP21eXBqv
+z4p$&39-im~$`6j;WG!o9soQWy&gxs;J!EoG`X-B`au<PnO1#XDJ+mQC<*d0>)3sTJ
+zG%lwa#hTNe^*AwMNjXlqTHkp0NS!Pxv;R>&!-|6jm;82%A?SdB{J7A-94coMEeRQ>
+z`tTv8udJRdQ>%(uWV{yHG>Xo=%IFJ;tCzl$g4N_<AGh9!Y)b6}ro@}5lgoXTW~##4
+z*7|blxt`W!<Q4)bHRKT_k*`a=mNSX3BU;<7vQY)<>@w6C&^{B`Y4~vl@{G0Vf|lL6
+zql$e}ne~YFyX4LySYvo|;{ZR8<@wpWWWW3{FyJksejwUPC@u}b*@Ahaaq7N9x<28O
+zmL0|DwIKz2bIO<m$H_X9I3KRFRPI#pphJB=<-qh_+HNN&F{DcmjE(bd>!|%6$84iH
+z);krqhQ{^R^k}k-XK9IHO+^qaw=4NmmJ-pB-d7l_r|Vt>dh3v$KuJc6;$LW@4_Z<X
+zj4wV&RboAG7y#hZ+IWOq^<eQU_Hrrqz_|3_r(-fB%R`ghO>LD(btzZO-Nonb5XzwB
+z?`(UbM!Z};-2{Gk!={o%FP!lXUqrMA%?N(hfRo0WyV$Wa2Nv}XdV$!ywoEP>V1-m}
+zV@*MQ5^Qy_&YNtQLCvigw%rbn$(sTk@_DZdJzibXSx|^#`OaJ{S+6E4)`T<zQm)Gv
+zITnY-QxXIgOt)7y{n`fUlPJNE8koa~Tc;=Vj7WnCrcUKl9ft$R%fsVJ3$rWeBNj`;
+zE7W&6_tVzy$q@3B!}Ue%7E33$5b{$Gp{X5$1N~HV*WB`J6bkdu&3(k%Q=x)ziefr3
+z>v$0Z%(#TGRdV3GMTcx93$j8y!u<E3fNt0zB2=v|4yF88uPJYR-5qdV4w|PvV6}=j
+zN6y(#9{NnBn|k}_mbd{EMRYo()B$}kXNHU{$s?wgDS@)owYb6YK?x!AZX{j*lplo5
+zUQqQ7m`FVM4uBZOK#t8TcLPQq>;sYm#ThIg`8g+!FFLfFFB*%;oKgMBq37$~B<7R4
+z0kK_3!zb~9b_~$&kBH4Nu5ZlF{g|H0dyV<sUef60A+Cb~0hz)7&R(MYVlQ2sObu=S
+zk;SF|uL$3buDGe4sgvRN1o1DK;^^2eIS@vqkjL(t@~~XWy{^DdL9BKg=z)+0V#2dv
+z-ED8-69wj7Ft_V@;@nSwy(u^AY@ifn4h^}O?{`11`u<3s_2}UvxXCPBD4Z&oI!qMB
+zOD5zwEn}Zy;zu<eKpu%mf3Tlzh8s8iN(zvoE$zKGSw?N{@gg}$)K(l6*L_!1I#Zkg
+zXEM5`J;ws*kAv9|f#pLurtCnLvdA8k(3KTFwTXuaWXEtEy-mIz0TuQMt}T)?&n-}Q
+zZmG|Jy(T4BGA(*Vv>HRsg*HFk$a~c@Q<_Fg2ss}_EPS*&VYr|_jXkviB|bPkpOFO2
+z>=J>mDqF@}*W&62acMR&Pq}0JUUC@rt+HBHc}a&M6&=h1X^0`Z@*M3-T+vGTEd{fQ
+zZ#TZh-c&cjZVmXTv?2Km!x63JhMDaj-gTj{jx^8HDJt+=-;C^kEsXuYj>C#XZTTez
+zw1Gzmso|m*E>Tk}jiwp5(-H}(EJv2hWi_Sc7QtZjgJ_k7QVBzj>{nJihoC2U#hk~$
+z{SaDV#XNU5;=3>94pH^*cpib*;HeRGAnEa1oles87M546-hV^PXt@w;`BcJ~$am4p
+zz79@&=t)~~S9P16SA`s0jgj{WwM$^93(Ktih5kq~hLj)Q!BC8u#x^>R_rb*m<yWJM
+z!aXl;Go6Gy6(RBA#<{Citm$6#N>pD3sZ7SLLztcc?Whh|)C5`{)$B#x1}}AQb6q|C
+zJyiRZFLT1QElT$kOT~v*KFEbNZEbyO6WEOjtPaf9Yl7*W&`Si-f=CQoNA53p%-jcR
+z*&+MP7SH&Nzc^pf$-8nqJ<;go>rbDaV@+~MeLL*9+ey64w<vHMs3AjYEDCr{N02+J
+z`(iSzj!ZNU!nVh$pPf5ejm?hY2|Si0u^kf^D(BeZg+i>^1}s_Q)I-k>#<1I|OD{BM
+zToTyeS;spWjItG@(iE{cqj0!(#&HGlw;5+-Q^9E7(7dtalRXE)M~dvl+MuZx@s`LW
+z;j77{m@q!Ws1j)Xni4J_CLcZ#HW5xg$o`eaXvm2(@46WMR<^w3$JSlAsj8lM(hwAg
+z-)RWV|JIOaj%#$xcgGbegu?Y`v8)2$2e=d;ZckFJ6^%M#x`#O1_>W|l<dpjP+V_<A
+zp<Oj4T88igf5Kx%+C=3yL?Dh}LzosSI50R@0a5p0gg{~fu*_&XSXT9E&ub(a!@-#J
+z?s6LHFD9aJt%Eq1{0ii2-jcE;W5nCCcC>8zT@9)OruT1!f=LG|-hFU2i0%KxtLc1n
+z`~t0t--;1yDEUlojAM4B!ZE^V?Xjoh5%Z{4Wn4mUh${h4pJ{f&2M(K}!Q^0VemQ*F
+zyCZ9s@a3KPh^SWQC#T7;)dI4*z#v=-Ii$!{z|a|5?3jzTEWxzn7aSh~_*#zokGw&@
+z(|SySG;se!+U{>%Skk|wRmR@f@c+!9Y>XnzD}g67s5rxv-z+e3F)gGH<%v`ZDPJ{A
+z8FBpT-PA|VJs>>l#pqW%hJ07MI9EB9x1gQC=TNm!jE0KUlGc5@)gw(5S4+A=8jD{`
+zma3IImdVogHQiEba2Jp^WM2Dpy=gY>=EACzawU?j_|P7wF1f(5EMiP=bk!Q+7g^=>
+z%A%;Om(0GAfhb_DE1F<|4hm>wC?&6emAHjh=0}2l(HW^X?`c9~zdZyf|8mL-hEC3=
+zPNbr4rgr}>oludMM^!|7pu^*ufouTb6HuW9*HWOSZjX=%5bRQ_nu(WTAri)`E|f{I
+zl)eLhfWV~FX>!UVQ!JPQVA3sLy^h*lmP6W%v^?{<KlWI59?#;|@94ONTH}cTrc6cH
+zfG|^uDousYM|6fe$CiT_DybcK6#~4Ifo(MUo&}DH-YSfl-V$KcUSXKZS#B8Qp(*@|
+z^9|8ZYrc^xp$Qt(b+;#Z&O|E6(M`<JEO>WhjB$%IdbwJyHOT2<a=kIHl<kKyxiYnv
+zw$|MBB9H2{@6B2qu@Z|*)ZQh1B=dPkn7cAJcA;aYNim{Du01;+E#%Ai(pi2dVx-nn
+zk8mMA*gH-~n6^502>T|RN`2H!a<A#S?GPA4@1vDYGZu*OOGLFYzkxEA#`-vsGk>CC
+zor`u_q@iRy?)imJRV%OR74y(lceFeR9mt53i>Q-p)0htIK7N#;Kum69)~3}=VjZD%
+zR-&)n&{$$y@*R=FlS#^Q^3ht`BVf~&d8g=dZ<xjf2iTS!C}Y<d-jc2o%%E0nU6Z~w
+za(z?H>l$nI#_~2-(YBGyD{s_Q%(pqp*&9%B2l6`D5z+(Qg|7PX4g4l9jG@d%JS4>w
+zK|hdilwmB<I72VPC_{IwfkeLk+GOR}<gHGb3LbS8cii&)-f(}i?nd6X`*P}lq5FiS
+z6r%h0=l4yPo@TG;)CpGhCS?%60U;r}<DR=uZZ-}G<0E?UY&dprk~-I=>`JAfgE>H$
+z6EVn9i;c=xL7!sV=B#;1N)d|gr8H1%`5~ZYKawtPS(U&J?`hZhz3K+G?EuT9fP25}
+z0E}6bB^Mm4EYm5@FMx;l*$ecs+%KrSakPFj;%gHO{5+H?8L?2-$@vj4TCMU$TR=mk
+zKboLuL@e668x>a}$5sk4v8YPYMip9CI-0JMi@3J0cp=vTCw{_#d)@X&5><N^!VlpV
+zC!m)43GbpxS@vfv8rY`{Qy<8QLrU2k7Z~cvo8g$Hq{YK5jsVECmq_609EOKNt&2F1
+z9I}Y+5ePiO^w~4j?YWxA#DVVz*FlfhnHx^PU!S1AwzT21m$8(QY>%1ou1b{6OI2p(
+z<^N&T2_&pA*+7ASXn$+fiT}r5{8x5EapZfo9`82m8H$36f{S2SKy*T*tFee|2oejC
+z<N7<9^gNT|ggVgmC7ml^-^5e7fGQ=-qkW%DXM+2ihbu6L$QO{i2z0nExH?Q*Ich>=
+zaOm<>d7(t?VgLy9@iCFNRIx{hpRk;UvFGo*+`H7hkLYCH>Lgfnk-QZ7qW&&=lDFJ#
+zKmksKNw!V}SlC(GN%$Se%gv(1W|nLzkz5ZBO)=&?ESTQ2+2Rs$*;vjPW#}4lIMo^g
+zlM_mBtkc-Mdej(qrkCH4QRubHCQz|ngdA7eesKzm|JJhrrTsZNk0m-~5p#lxRNa<;
+zUAC-e^4c1fWy$wb%15Cq7NwqMlS70VChz0}x5rh}fB+(43h55@(J3VdAS4XM8V#{N
+zBiGOTB4b8)@R8yi4GX>Deae|}N)WVO?-dDY;(TM|9@_7J90~ps+>YN1m?(eii&6cL
+zHF<u_#!gA~FrbCV@7SzlI=7sHgO%z5kY^(!2m`xB(losN0mibWLlVl4l{>+RYr^4g
+zB=ho(#>V`d9v(-ackeeZ;DHbfal6f+NI*dCz-l+r(}VyZkW;4p*;q;GpP=06Wm-RD
+z)3dy&%Mb4RirUt>h{_mH0FhQIYKfX+xx3Th++JEWLQq~(gj#t-pDm(~n#9^M0`>^$
+zaTmzL9zwg+Wk`J}QVy9mK5I(^6-6>JIX#@IR}CKG87_lfTO{bW+v0an$*D}$hc1!S
+z?_~~kfvSs5SIi`CRgT4Fx@=XuTuBMC<ab{gg92bBxf25c0pn80%9S<%Zw8W6w}!WZ
+zx7KxD4CHhAEa7V4{~@G2B<DNPiSu`4C{IMI{g&vzc4@v7ZE0uz>s3T)NvcNxi8rHI
+z)^>BnvqOcTFgnG5ErGaXFAz=ftq+P}be^mvs-)6IEgD)EB!A~?6mxbWD7C|p<Ft>=
+zyQ6To*B1}K2C&lLCXBp5=*%EvR;e=#6R|ISBE@6AFeX~t`c4pxx$SwG0l?Y5q*4S~
+zLmP(@z5nbkS2s|l8)q`JtvAye1~OoMe5bBw%TN;fP%*}!<IHngx71V}$kpLU#Y}Et
+z7YG>>mQaXYpBbBX7J7z-D8$6)S$Eh{C|L0XW-ryH56_f&_rWc*^gYO<pvE^=>A8)S
+z*i0#2bU=hGcUjSrZmG)Ss{MNR7l>q^!?1mG&#^`-7MHE+ToOpxT+xsZ4;Z}+_kolE
+z{%k2;H<Esqn-$Ia0Mi?N%^UkV-zmI2xOE<gJsJfUgkUCtDGe`B<~jX59_5l;iQQQ5
+zMT!7WVgjKzCAc$;5|yzQ01{I2SO$f{I}2hzQJW;Y6%B1a;r@laJpDJ#(h)dHt6|rr
+z?b!#PS-Lq?VMsH32~jD@<j7ZEC9&$|@)TikrnM$dd&)=@Vv&<sAK-jn`GBEXzTBsk
+zkN=Tk0|r3@`oFdRxpDvdr!G8y{MBbL{EG7PO&9tZ!aVR#D8Ca!d?tnj@~5Wp-w9(s
+z6PEw8@J}7*zr&$=hLiSNoL@TEe}(<IIiCF)?AbqoectN-^P7C{v;VpCjp5mwjDr62
+zuKV9H1Mv)91@7Ng;&(Ez&txLto>`V(1%GbFL4PLL2luC>z#q2fSBRhcLY`|x6w>c{
+zcz(tCxeJ2m8IB0b-{>j%74GN$0Fq~L*{FZ3k>XdtpG)5Hp8?LG{jVm2U$K5J=Eix3
+zrHJv{lKEeOelA3Q4%CDB+e+|Xfqt&GC4L5^fc1B(n199lxmfl2!0NDnTe15q(9boS
+z&j;3r^LHv;f5rQ`;PLsuAn|@%_xUT(&&7w&^#L3Ie^pEViuH4a8SXQz`9EVlD_;B+
+z>E|M%=SX}+zpqdG73t>^k>^N7B)=~~`W5Ntv^wcCBxLfxS77odd-qeC_qolXp!!{M
+z{#Trz^P|s|VW0Z9DdJy&e$Em;*V3yOe<!*6_s?i<+CQZVe--{YhW^}=dj47X&w0k*
+zjRoZyTp81Ub6bCv|2ghU|4jbyzsmnM2>++;{8Pw~>=}44%ijzn{|fnYxQyl*<Quks
+z7J2*?`RAzA^NsMp{`Z1!zasv8x2AlCc*^njV_UzX{(L)puFXC?f9IC|E8fqSpy$pW
+pGT%SAVg3sHvxohBp*;Ej*?meu8vKW=Me+2N`{Y2m2!8+V{{j4;n#ceE
+
