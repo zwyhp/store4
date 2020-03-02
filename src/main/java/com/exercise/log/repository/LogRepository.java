@@ -54,7 +54,10 @@ public class LogRepository implements IlogRePository {
 
     @Override
     public List findAll() {
-        return null;
+        String sql = "SELECT * FROM log";
+        NativeQuery nativeQuery = currentSession().createNativeQuery(sql);
+        nativeQuery.addEntity(LogDomin.class);
+        return nativeQuery.list();
     }
 
     @Override

@@ -3,7 +3,7 @@ package com.exercise.product.service;
 import com.exercise.domain.PageDomain;
 import com.exercise.product.domain.Products;
 import com.exercise.product.repository.IProductsRepository;
-import com.exercise.util.BussinessExceptionUtil;
+import com.exercise.util.BussinessUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,34 +18,41 @@ public class ProductServiceImpl implements IProductService{
 
     @Override
     public int addObject(Products products) {
-        return 0;
+        Products productsByname = productsRepository.findProductsByname(products.getName());
+        BussinessUtil.isNull(productsByname,BussinessUtil.PRODUCTNAME_REPETITION);
+        return productsRepository.save(products);
     }
 
     @Override
     public void deleteObjectById(int id) {
-
+        Products objectById = findObjectById(id);
+        BussinessUtil.isNull(objectById,BussinessUtil.PRODUCT_INEXISTENCE);
+        productsRepository.deleteProductsByid(id);
     }
 
     @Override
     public void updateObjectById(Products product) {
-        findObjectById(product.getId());
+        Products objectById = findObjectById(product.getId());
+        BussinessUtil.isNull(objectById,BussinessUtil.PRODUCT_INEXISTENCE);
         productsRepository.updateProductsByid(product);
     }
 
     @Override
     public List findAll() {
-        return null;
+        return productsRepository.findAll();
     }
 
     @Override
     public PageDomain pagingfindAll(int total, int pagesize) {
-        return null;
+        int size = productsRepository.findAll().size();
+        List users = productsRepository.pagingfindProducts(total, pagesize);
+        return new PageDomain(total, pagesize, size, users);
     }
 
     @Override
     public Products findObjectById(int id) {
         Products productsById = productsRepository.findProductsById(id);
-        BussinessExceptionUtil.isNull(productsById,"商品不存在");
+        BussinessUtil.isNull(productsById,BussinessUtil.PRODUCT_INEXISTENCE);
         return productsById;
     }
 
@@ -53,7 +60,7 @@ public class ProductServiceImpl implements IProductService{
         Products objectById = findObjectById(id);
         int newnum =  objectById.getPnum()-reducenum;
         if (newnum<=0){
-            BussinessExceptionUtil.error("库存不足");
+            BussinessUtil.error(BussinessUtil.UNDER_STOCK);
         }
         objectById.setPnum(newnum);
         productsRepository.updateProductsByid(objectById);

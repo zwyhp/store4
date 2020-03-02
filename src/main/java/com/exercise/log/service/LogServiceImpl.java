@@ -3,12 +3,12 @@ package com.exercise.log.service;
 import com.exercise.domain.PageDomain;
 import com.exercise.log.domin.LogDomin;
 import com.exercise.log.repository.IlogRePository;
+import com.exercise.util.BussinessUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class LogServiceImpl implements ILogService {
@@ -31,13 +31,14 @@ public class LogServiceImpl implements ILogService {
 
     @Override
     public void deleteObjectById(int id) {
-        if (ilogRePository.findUserById(id) != null) {
-            ilogRePository.deleteUserByid(id);
-        }
+        LogDomin userById = ilogRePository.findUserById(id);
+        BussinessUtil.isNull(userById,BussinessUtil.LOG_INEXISTENCE);
+        ilogRePository.deleteUserByid(id);
     }
 
     @Override
     public void updateObjectById(LogDomin logDomin) {
+        BussinessUtil.error(BussinessUtil.LOG_ERROR);
     }
 
     @Override
@@ -48,9 +49,9 @@ public class LogServiceImpl implements ILogService {
     @Override
     public PageDomain pagingfindAll(int total, int pagesize) {
         int size = ilogRePository.findAll().size();
-        List<LogDomin> logDomins = ilogRePository.PagingfindLog(total, pagesize);
-        PageDomain pageDomain = new PageDomain(total,pagesize,size,logDomins);
-        return pageDomain;
+        List logDomins = ilogRePository.PagingfindLog(total, pagesize);
+        return new PageDomain(total,pagesize,size,logDomins);
+
     }
 
     @Override

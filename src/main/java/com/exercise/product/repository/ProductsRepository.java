@@ -40,7 +40,8 @@ public class ProductsRepository implements IProductsRepository{
 
     @Override
     public void deleteProductsByid(int id) {
-
+        Products productsById = findProductsById(id);
+        currentSession().delete(productsById);
     }
 
     @Override
@@ -50,21 +51,39 @@ public class ProductsRepository implements IProductsRepository{
 
     @Override
     public List findAll() {
-        return null;
+        String sql = "SELECT * FROM Products";
+        return currentSession().createNativeQuery(sql)
+                .addEntity(Products.class)
+                .list();
     }
 
     @Override
     public List pagingfindProducts(int total, int pagesize) {
-        return null;
+        String sql = "SELECT * FROM Products";
+        return currentSession().createNativeQuery(sql)
+                .addEntity(Products.class)
+                .setFirstResult(total - 1)
+                .setMaxResults(pagesize)
+                .list();
     }
 
     @Override
     public List conditionsQuery(String name) {
-        return null;
+        String sql = "SELECT * FROM user where name like :name";
+        return currentSession().createNativeQuery(sql)
+                .addEntity(Products.class)
+                .setParameter("name","%"+name+"%")
+                .list();
     }
 
     @Override
-    public List conditionsQuery(String name, int uid) {
-        return null;
+    public List conditionsQuery(int uid) {
+        String sql = "SELECT * FROM user where u_id like :uid";
+        return currentSession().createNativeQuery(sql)
+                .addEntity(Products.class)
+                .setParameter("uid",uid)
+                .list();
+
     }
+
 }

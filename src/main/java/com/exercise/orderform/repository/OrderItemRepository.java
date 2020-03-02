@@ -36,6 +36,11 @@ public class OrderItemRepository implements IOrderItemRepository {
     }
 
     @Override
+    public void updateOrderitem(Orderitem orderitem) {
+        currentSession().update(orderitem);
+    }
+
+    @Override
     public List findOrderitemByOid(int oId) {
         String sql = "SELECT * FROM Orderitem where order_id = :o_id";
         List list = currentSession().createNativeQuery(sql)

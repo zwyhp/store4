@@ -3,7 +3,7 @@ package com.exercise.user.service;
 import com.exercise.domain.PageDomain;
 import com.exercise.user.domain.User;
 import com.exercise.user.repository.IuserRepository;
-import com.exercise.util.BussinessExceptionUtil;
+import com.exercise.util.BussinessUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,23 +21,23 @@ public class UserServiceImpl implements IuserService {
     @Override
     public int addObject(User user) {
         User userByname = iuserRepository.findUserByname(user.getUsername());
-        BussinessExceptionUtil.isNull(userByname,"用户名重复");
+        BussinessUtil.isNull(userByname,BussinessUtil.USERNAME_REPETITION);
         user.setCreatetime(LocalDateTime.now());
-        int i = iuserRepository.save(user);
-        return i;
+        int id = iuserRepository.save(user);
+        return id;
     }
 
     @Override
     public void deleteObjectById(int id) {
         User userByname = iuserRepository.findUserById(id);
-        BussinessExceptionUtil.isNull(userByname,"删除的用户不存在");
+        BussinessUtil.isNull(userByname,BussinessUtil.USER_INEXISTENCE);
         iuserRepository.deleteUserByid(id);
     }
 
     @Override
     public void updateObjectById(User user) {
         User userByname = iuserRepository.findUserById(user.getId());
-        BussinessExceptionUtil.isNull(userByname,"更改的用户不存在");
+        BussinessUtil.isNull(userByname,BussinessUtil.USER_INEXISTENCE);
         iuserRepository.updateUserByid(user);
     }
 
@@ -50,14 +50,13 @@ public class UserServiceImpl implements IuserService {
     public PageDomain pagingfindAll(int total, int pagesize) {
         int size = iuserRepository.findAll().size();
         List users = iuserRepository.pagingfindUser(total, pagesize);
-        PageDomain pageDomain = new PageDomain(total, pagesize, size, users);
-        return pageDomain;
+        return new PageDomain(total, pagesize, size, users);
     }
 
     @Override
     public User findObjectById(int id) {
         User user = iuserRepository.findUserById(id);
-        BussinessExceptionUtil.isNull(user,"查找的用户不存在");
+        BussinessUtil.isNull(user,BussinessUtil.USER_INEXISTENCE);
         return user;
     }
 

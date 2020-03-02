@@ -3,7 +3,7 @@ package com.exercise.user.service;
 import com.exercise.domain.PageDomain;
 import com.exercise.user.domain.Role;
 import com.exercise.user.repository.IRoleRepository;
-import com.exercise.util.BussinessExceptionUtil;
+import com.exercise.util.BussinessUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
@@ -15,7 +15,7 @@ public class RoleServiceImpl implements IroleService {
     @Override
     public int addObject(Role role) {
         Role roleByname = roleRepository.findRoleByname(role.getName());
-        BussinessExceptionUtil.isNull(roleByname,"角色名已存在");
+        BussinessUtil.isNull(roleByname,BussinessUtil.ROLENAME_REPETITION);
         role.setEnable(1);
         role.setCreateTime(LocalDateTime.now());
         role.setUpdateTime(LocalDateTime.now());
@@ -25,7 +25,7 @@ public class RoleServiceImpl implements IroleService {
     @Override
     public void deleteObjectById(int id) {
         Role roleById = roleRepository.findRoleById(id);
-        BussinessExceptionUtil.isNull(roleById,"角色不存在");
+        BussinessUtil.isNull(roleById,BussinessUtil.ROLE_INEXISTENCE);
         /*这里删除角色是关闭使用*/
         roleRepository.EnableRoleByid(id);
     }
@@ -33,7 +33,7 @@ public class RoleServiceImpl implements IroleService {
     @Override
     public void updateObjectById(Role role) {
         Role roleById = roleRepository.findRoleById(role.getId());
-        BussinessExceptionUtil.isNull(roleById,"角色不存在");
+        BussinessUtil.isNull(roleById,BussinessUtil.ROLE_INEXISTENCE);
         roleRepository.updateRoleByid(role);
     }
 
@@ -46,14 +46,14 @@ public class RoleServiceImpl implements IroleService {
     public PageDomain pagingfindAll(int total, int pagesize) {
         int size = roleRepository.findAll().size();
         List users = roleRepository.pagingfindRole(total, pagesize);
-        PageDomain pageDomain = new PageDomain(total, pagesize, size, users);
-        return pageDomain;
+        return new PageDomain(total, pagesize, size, users);
+
     }
 
     @Override
     public Role findObjectById(int id) {
         Role roleById = roleRepository.findRoleById(id);
-        BussinessExceptionUtil.isNull(roleById,"角色不存在");
+        BussinessUtil.isNull(roleById,BussinessUtil.ROLE_INEXISTENCE);
         return roleById;
     }
 }

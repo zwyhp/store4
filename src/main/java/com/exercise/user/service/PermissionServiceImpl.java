@@ -3,7 +3,7 @@ package com.exercise.user.service;
 import com.exercise.domain.PageDomain;
 import com.exercise.user.domain.Permission;
 import com.exercise.user.repository.IPermissionRepository;
-import com.exercise.util.BussinessExceptionUtil;
+import com.exercise.util.BussinessUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,7 +19,7 @@ public class PermissionServiceImpl implements IPermissionService {
     @Override
     public int addObject(Permission permission) {
         Permission permissionByPer = permissionRepository.findPermissionByPer(permission.getPermission());
-        BussinessExceptionUtil.isNull(permissionByPer,"权限重复");
+        BussinessUtil.isNull(permissionByPer,BussinessUtil.PERNAME_REPETITION);
         permission.setAddTime(LocalDateTime.now());
         permission.setUpdateTime(LocalDateTime.now());
         return permissionRepository.save(permission);
@@ -28,14 +28,14 @@ public class PermissionServiceImpl implements IPermissionService {
     @Override
     public void deleteObjectById(int id) {
         Permission permissionByPer = permissionRepository.findPermissionById(id);
-        BussinessExceptionUtil.isNull(permissionByPer,"删除的权限不存在");
+        BussinessUtil.isNull(permissionByPer,BussinessUtil.PER_INEXISTENCE);
         permissionRepository.deletePermissionByid(id);
     }
 
     @Override
     public void updateObjectById(Permission permission) {
         Permission permissionByPer = permissionRepository.findPermissionById(permission.getId());
-        BussinessExceptionUtil.isNull(permissionByPer,"更改的权限不存在");
+        BussinessUtil.isNull(permissionByPer,BussinessUtil.PER_INEXISTENCE);
         permission.setUpdateTime(LocalDateTime.now());
         permissionRepository.updatePermission(permission);
     }
@@ -49,14 +49,14 @@ public class PermissionServiceImpl implements IPermissionService {
     public PageDomain pagingfindAll(int total, int pagesize) {
         int size = permissionRepository.findAll().size();
         List users = permissionRepository.pagingfindPer(total, pagesize);
-        PageDomain pageDomain = new PageDomain(total, pagesize, size, users);
-        return pageDomain;
+        return new PageDomain(total, pagesize, size, users);
+
     }
 
     @Override
     public Permission findObjectById(int id) {
         Permission permissionByPer = permissionRepository.findPermissionById(id);
-        BussinessExceptionUtil.isNull(permissionByPer,"权限不存在");
+        BussinessUtil.isNull(permissionByPer,BussinessUtil.PER_INEXISTENCE);
         return permissionByPer;
     }
 }

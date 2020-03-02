@@ -21,7 +21,7 @@ public interface IProductsRepository {
 
     List conditionsQuery(String name);
 
-    List conditionsQuery(String name, int uid);
+    List conditionsQuery(int uid);
 
 
 }

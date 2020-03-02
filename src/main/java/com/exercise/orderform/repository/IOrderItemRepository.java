@@ -12,6 +12,8 @@ public interface IOrderItemRepository {
 
     void deleteOrderitemByOid(int oId);
 
+    void updateOrderitem(Orderitem orderitem);
+
     List findOrderitemByOid(int oId);
 
 }
