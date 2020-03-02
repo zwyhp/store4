@@ -8,15 +8,21 @@ import java.util.List;
 public interface IuserRepository {
     long count();
 
-    User save(User user);
+    int save(User user);
 
-    User findByUsername(String username);
+    User findUserByname(String username);
 
-    User deleteByUsername(String username);
+    User findUserById(int id);
 
-    User updateByUsername(User user);
+    void deleteUserByid(int id);
 
-    List<User> findAll();
+    void updateUserByid(User user);
 
+    List findAll();
 
+    List pagingfindUser(int total, int pagesize);
+
+    List conditionsQuery(String username);
+
+    List conditionsQuery(String username, int roleid);
 }
