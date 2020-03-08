@@ -1,6 +1,6 @@
 package com.exercise.log.repository;
 
-import com.exercise.log.domin.LogDomin;
+import com.exercise.log.domain.LogDomin;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.exercise.controller;
+package com.exercise.util;
 
 /**
  * 业务异常

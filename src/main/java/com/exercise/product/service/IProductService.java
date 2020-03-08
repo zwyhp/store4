@@ -3,7 +3,9 @@ package com.exercise.product.service;
 import com.exercise.domain.PageDomain;
 import com.exercise.interfaceI.IService;
 import com.exercise.product.domain.Products;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface IProductService extends IService<Products> {
@@ -26,4 +28,6 @@ public interface IProductService extends IService<Products> {
     Products findObjectById(int id);
 
     boolean reducePnum(int id,int reducenum);
+
+    void updateImgByid(int id, MultipartFile file) throws IOException;
 }

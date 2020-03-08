@@ -1,10 +1,14 @@
 package com.exercise.user.domain;
 
 
+import com.exercise.util.verify.VerifyError;
+import com.exercise.util.verify.VerifyUpdate;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.Null;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Entity
@@ -13,23 +17,25 @@ public class User {
 
     @Id
     @GeneratedValue
+    @NotNull(message = VerifyError.ID_NOT_NULL ,groups = {VerifyUpdate.class})
     @Column(name = "id")
     private int id;
-    @Null
+    @NotEmpty(message = VerifyError.USER_NAME_NOT_NULL)
     @Column(name = "username")
     private String username;
-    @Null
+    @NotEmpty(message = VerifyError.USER_PWD_NOT_NULL)
     @Column(name = "password")
     private String password;
-    @Null
+    @NotNull(message = VerifyError.ROLE_ID_NOT_NULL)
     @Column(name = "role_id")
-    private int roleid;
-    @Null
+    private int roleId;
+    @Email
+    @NotEmpty(message = VerifyError.EMAIl_NOT_NULL)
     @Column(name = "email")
     private String email;
     @Column(name = "create_time")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime createtime;
+    private LocalDateTime createTime;
 
     public User() {
     }
@@ -37,9 +43,9 @@ public class User {
     public User(String username, String password, int roleid, String email, LocalDateTime createtime) {
         this.username = username;
         this.password = password;
-        this.roleid = roleid;
+        this.roleId = roleid;
         this.email = email;
-        this.createtime = createtime;
+        this.createTime = createtime;
     }
 
     public int getId() {
@@ -66,12 +72,12 @@ public class User {
         this.password = password;
     }
 
-    public int getRoleid() {
-        return roleid;
+    public int getRoleId() {
+        return roleId;
     }
 
-    public void setRoleid(int roleid) {
-        this.roleid = roleid;
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
     }
 
     public String getEmail() {
@@ -82,11 +88,18 @@ public class User {
         this.email = email;
     }
 
-    public LocalDateTime getCreatetime() {
-        return createtime;
+    public LocalDateTime getCreateTime() {
+        return createTime;
     }
 
-    public void setCreatetime(LocalDateTime createtime) {
-        this.createtime = createtime;
+    public void setCreateTime(LocalDateTime createTime) {
+        this.createTime = createTime;
+    }
+
+    public void copy(User user){
+        this.username = user.username;
+        this.password = user.password;
+        this.roleId = user.roleId;
+        this.email = user.email;
     }
 }

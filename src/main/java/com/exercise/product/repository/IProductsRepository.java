@@ -23,5 +23,7 @@ public interface IProductsRepository {
 
     List conditionsQuery(int uid);
 
+    void updateImgByid(int id, String url);
 
+    Products findImgByMD5Name(String MD5name);
 }

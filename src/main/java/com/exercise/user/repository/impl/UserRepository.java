@@ -1,6 +1,7 @@
-package com.exercise.user.repository;
+package com.exercise.user.repository.impl;
 
 import com.exercise.user.domain.User;
+import com.exercise.user.repository.IuserRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.NativeQuery;
@@ -38,10 +39,13 @@ public class UserRepository implements IuserRepository {
 
     @Override
     public User findUserByname(String username) {
-        String sql = "select * FROM User WHERE  User.username =" + username + "";
-        NativeQuery nativeQuery = currentSession().createNativeQuery(sql,User.class);
-        User user = (User) nativeQuery.list().get(0);
-        return user;
+        String sql = "SELECT * FROM user where username = :username";
+        List users = currentSession().createNativeQuery(sql)
+                .addEntity(User.class)
+                .setParameter("username", username)
+                .list();
+        return users.isEmpty() ? null : (User) users.get(0);
+
     }
 
     @Override
@@ -56,7 +60,7 @@ public class UserRepository implements IuserRepository {
     }
 
     @Override
-    public void updateUserByid(User user) {
+    public void updateUser(User user) {
         currentSession().update(user);
     }
 
@@ -79,11 +83,10 @@ public class UserRepository implements IuserRepository {
         return list;
     }
 
-    public List conditionsQuery(String username , int roleid){
-        String sql = "SELECT * FROM user where username like :username AND role_id = :roleid";
+    public List conditionsQuery(int roleid){
+        String sql = "SELECT * FROM user where role_id = :roleid";
         List list = currentSession().createNativeQuery(sql)
                 .addEntity(User.class)
-                .setParameter("username","%"+username+"%")
                 .setParameter("roleid",roleid)
                 .list();
         return list;

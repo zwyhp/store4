@@ -1,6 +1,7 @@
-package com.exercise.user.repository;
+package com.exercise.user.repository.impl;
 
 import com.exercise.user.domain.Role;
+import com.exercise.user.repository.IRoleRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.NativeQuery;
@@ -38,10 +39,12 @@ public class RoleRepository implements IRoleRepository {
 
     @Override
     public Role findRoleByname(String rolename) {
-        String sql = "select * FROM Role WHERE name  =" + rolename + "";
-        NativeQuery nativeQuery = currentSession().createNativeQuery(sql, Role.class);
-        Role role = (Role) nativeQuery.list().get(0);
-        return role;
+        String sql = "SELECT * FROM srole where rname = :rolename";
+        List users = currentSession().createNativeQuery(sql)
+                .addEntity(Role.class)
+                .setParameter("rolename", rolename)
+                .list();
+        return users.isEmpty() ? null : (Role) users.get(0);
     }
 
     @Override
@@ -63,7 +66,7 @@ public class RoleRepository implements IRoleRepository {
 
     @Override
     public List findAll() {
-        String sql = "SELECT * FROM role";
+        String sql = "SELECT * FROM srole";
         NativeQuery nativeQuery = currentSession().createNativeQuery(sql);
         nativeQuery.addEntity(Role.class);
         return nativeQuery.getResultList();
@@ -71,7 +74,7 @@ public class RoleRepository implements IRoleRepository {
 
     @Override
     public List pagingfindRole(int total, int pagesize) {
-        String sql = "SELECT * FROM Role";
+        String sql = "SELECT * FROM srole";
         List list = currentSession().createNativeQuery(sql)
                 .addEntity(Role.class)
                 .setFirstResult(total - 1)

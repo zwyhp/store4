@@ -1,8 +1,11 @@
 package com.exercise.orderform.domain;
 
+import com.exercise.util.verify.VerifyError;
+import com.exercise.util.verify.VerifyUpdate;
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 @Entity
@@ -10,22 +13,21 @@ import java.time.LocalDateTime;
 public class Orders {
     @Id
     @GeneratedValue
+    @NotNull(message = VerifyError.ID_NOT_NULL,groups = {VerifyUpdate.class})
     @Column(name = "id")
     private int id;
-    @NotNull
+    @NotNull(message = VerifyError.ORDER_UID_NOT_NULL)
     @Column(name = "u_id")
     private int uId;
-    @NotNull
+    @NotNull(message = VerifyError.ORDER_MONEY_NOT_NULL)
     @Column(name = "money")
     private double money;
-    @NotNull
+    @NotEmpty(message = VerifyError.ORDER_ADDRESS_NOT_NULL)
     @Column(name = "receiverAddress")
     private String receiverAddress;
-    @NotNull
+    @NotEmpty(message = VerifyError.ORDER_PHONE_NOT_NULL)
     @Column(name = "receiverPhone")
     private String receiverPhone;
-    @NotNull
-    @Size(max = 1)
     @Column(name = "paystate")
     private int paystate;
     @Column(name = "ordertime")
@@ -98,5 +100,12 @@ public class Orders {
 
     public void setDateTime(LocalDateTime ordertime) {
         this.ordertime = ordertime;
+    }
+
+    public void copy(Orders orders){
+        this.money = orders.money;
+        this.receiverAddress = orders.receiverAddress;
+        this.receiverPhone = orders.receiverPhone;
+        this.paystate = orders.paystate;
     }
 }

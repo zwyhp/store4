@@ -1,4 +1,4 @@
-package com.exercise.log.domin;
+package com.exercise.log.domain;
 
 
 import javax.persistence.*;

@@ -86,4 +86,19 @@ public class ProductsRepository implements IProductsRepository{
 
     }
 
+    public void updateImgByid(int id, String url){
+        Products productsById = findProductsById(id);
+        productsById.setImgurl(url);
+        updateProductsByid(productsById);
+    }
+
+    @Override
+    public Products findImgByMD5Name(String MD5name) {
+        String sql = "SELECT * FROM Products where imgurl like :md5name";
+        return (Products)currentSession().createNativeQuery(sql)
+                .addEntity(Products.class)
+                .setParameter("md5name","%"+MD5name+"%")
+                .list().get(0);
+    }
+
 }

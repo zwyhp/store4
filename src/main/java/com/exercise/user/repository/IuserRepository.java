@@ -16,7 +16,7 @@ public interface IuserRepository {
 
     void deleteUserByid(int id);
 
-    void updateUserByid(User user);
+    void updateUser(User user);
 
     List findAll();
 
@@ -24,5 +24,5 @@ public interface IuserRepository {
 
     List conditionsQuery(String username);
 
-    List conditionsQuery(String username, int roleid);
+    List conditionsQuery(int roleid);
 }

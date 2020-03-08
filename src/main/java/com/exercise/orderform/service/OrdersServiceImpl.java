@@ -6,12 +6,13 @@ import com.exercise.orderform.domain.Orderitem;
 import com.exercise.orderform.domain.Orders;
 import com.exercise.orderform.repository.IOrderItemRepository;
 import com.exercise.orderform.repository.IOrdersRepository;
-import com.exercise.util.BussinessExceptionUtil;
+import com.exercise.util.BussinessUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -39,32 +40,58 @@ public class OrdersServiceImpl implements IOrdersService {
 
     @Override
     public void deleteObjectById(int id) {
-
+        Orders ordersByid = ordersRepository.findOrdersByid(id);
+        BussinessUtil.isNull(ordersByid,BussinessUtil.ORDER_INEXISTENCE);
+        ordersRepository.deleteOrdersByid(id);
+        orderItemRepository.deleteOrderitemByOid(id);
     }
 
     @Override
     public void updateObjectById(OrderAggregate orderAggregate) {
-
+        Orders orders = orderAggregate.getOrders();
+        List<Orderitem> orderitems = orderAggregate.getOrderitem();
+        Orders ordersByid = ordersRepository.findOrdersByid(orders.getId());
+        BussinessUtil.isNull(ordersByid,BussinessUtil.ORDER_INEXISTENCE);
+        ordersByid.copy(orders);
+        ordersRepository.updateOrdersByid(ordersByid);
+        List<Orderitem> orderitemByOid = (List<Orderitem>)orderItemRepository.findOrderitemByOid(ordersByid.getId());
+        for (int i = 0; i < orderitemByOid.size(); i++) {
+            Orderitem orderitem = orderitemByOid.get(i);
+            orderitem.copy(orderitems.get(i));
+            orderItemRepository.updateOrderitem(orderitem);
+        }
     }
 
     @Override
     public List findAll() {
-        return null;
+        return ordersRepository.findAll();
     }
 
     @Override
     public PageDomain pagingfindAll(int total, int pagesize) {
-        return null;
+        List pagelist = new ArrayList();
+        List<Orders> orders = (List<Orders>)ordersRepository.pagingfindOrders(total, pagesize);
+        for (Orders order : orders){
+            OrderAggregate orderAggregate = new OrderAggregate();
+            orderAggregate.setOrders(order);
+            orderAggregate.setOrderitem(orderItemRepository.findOrderitemByOid(order.getId()));
+            orderAggregate.setPayment(order.getPaystate());
+            pagelist.add(orderAggregate);
+        }
+        return new PageDomain(total,pagesize,findAll().size(),pagelist);
     }
 
     @Override
     public OrderAggregate findObjectById(int id) {
-        return null;
+        Orders ordersByid = ordersRepository.findOrdersByid(id);
+        BussinessUtil.isNull(ordersByid,BussinessUtil.ORDER_INEXISTENCE);
+        List orderitemByOid = orderItemRepository.findOrderitemByOid(id);
+        return new OrderAggregate(ordersByid,orderitemByOid,ordersByid.getPaystate());
     }
 
     public boolean paymentById(int id){
         Orders ordersByid = ordersRepository.findOrdersByid(id);
-        BussinessExceptionUtil.isNull(ordersByid,"订单不存在");
+        BussinessUtil.isNull(ordersByid,BussinessUtil.ORDER_INEXISTENCE);
         ordersByid.setPaystate(1);
         ordersRepository.updateOrdersByid(ordersByid);
         List orderitemByOid = orderItemRepository.findOrderitemByOid(ordersByid.getId());

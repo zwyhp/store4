@@ -4,31 +4,46 @@ package com.exercise.controller;
 import com.exercise.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
+import org.springframework.validation.BindException;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import java.net.BindException;
 
-/*
+import java.io.IOException;
 
-@ControllerAdvice
+
+//@ControllerAdvice
 public class GlobalExceptionHandler {
     private Logger log = LoggerFactory.getLogger(this.getClass());
 
-
-    */
-/**
-     * 数据校验异常
-     *//*
-
-    @ExceptionHandler(BindException.class)
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ResponseBody
-    public Object BindException(BindException e){
-        log.error("参数异常:"+e.getMessage());
-        return ResponseUtil.badArgument();
+    @ExceptionHandler(value = {BindException.class, MethodArgumentNotValidException.class})
+    public Object validationExceptionHandler(Exception exception) {
+        BindingResult bindResult = null;
+        if (exception instanceof BindException) {
+            bindResult = ((BindException) exception).getBindingResult();
+        } else if (exception instanceof MethodArgumentNotValidException) {
+            bindResult = ((MethodArgumentNotValidException) exception).getBindingResult();
+        }
+        String msg;
+        if (bindResult != null && bindResult.hasErrors()) {
+            msg = bindResult.getAllErrors().get(0).getDefaultMessage();
+            if (msg.contains("NumberFormatException")) {
+                msg = "参数类型错误！";
+            }
+        }else {
+            msg = "系统繁忙，请稍后重试...";
+        }
+       return ResponseUtil.badArgument(msg);
+    }
+
+    @ExceptionHandler(IOException.class)
+    @ResponseBody
+    public Object handleException(IOException e){
+        log.error("文件上传异常"+e.getMessage());
+        return ResponseUtil.fail(900,"文件上传失败");
     }
 
     @ExceptionHandler(Exception.class)
@@ -38,7 +53,6 @@ public class GlobalExceptionHandler {
         log.error(e.getMessage());
         return ResponseUtil.unsupport();
     }
-*/
 
 
     /**
@@ -54,8 +68,19 @@ public class GlobalExceptionHandler {
         return new ErrorTip(e.getCode(), e.getMessage());
     }
 
+    @ExceptionHandler(IOException.class)   //文件处理异常
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)   //返回一个指定的http response状态码
+    @ResponseBody
+    public ErrorTip notFount(IOException e) {
+        LogManager.me().executeLog(LogTaskFactory.exceptionLog(ShiroKit.getUser().getId(), e));
+        getRequest().setAttribute("tip", e.getMessage());
+        log.error("业务异常:", e);
+        return new ErrorTip(e.getCode(), e.getMessage());
+    }
 
-    *//**
+
+    */
+    /**
      * 用户未登录
      *//*
     @ExceptionHandler(AuthenticationException.class)   //此处为shiro未登录异常类
@@ -156,4 +181,4 @@ public class GlobalExceptionHandler {
         }
     }*/
 
-/*}*/
+}

@@ -1,8 +1,9 @@
-package com.exercise.user.service;
+package com.exercise.user.service.impl;
 
 import com.exercise.domain.PageDomain;
 import com.exercise.user.domain.Permission;
 import com.exercise.user.repository.IPermissionRepository;
+import com.exercise.user.service.IpermissionService;
 import com.exercise.util.BussinessUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,13 +14,13 @@ import java.util.List;
 
 @Service
 @Transactional
-public class PermissionServiceImpl implements IPermissionService {
+public class PermissionServiceImpl implements IpermissionService {
     @Autowired
     private IPermissionRepository permissionRepository;
     @Override
     public int addObject(Permission permission) {
         Permission permissionByPer = permissionRepository.findPermissionByPer(permission.getPermission());
-        BussinessUtil.isNull(permissionByPer,BussinessUtil.PERNAME_REPETITION);
+        BussinessUtil.isnotNull(permissionByPer,BussinessUtil.PERNAME_REPETITION);
         permission.setAddTime(LocalDateTime.now());
         permission.setUpdateTime(LocalDateTime.now());
         return permissionRepository.save(permission);
@@ -36,8 +37,10 @@ public class PermissionServiceImpl implements IPermissionService {
     public void updateObjectById(Permission permission) {
         Permission permissionByPer = permissionRepository.findPermissionById(permission.getId());
         BussinessUtil.isNull(permissionByPer,BussinessUtil.PER_INEXISTENCE);
-        permission.setUpdateTime(LocalDateTime.now());
-        permissionRepository.updatePermission(permission);
+        BussinessUtil.isnotNull(permissionRepository.findPermissionByPer(permission.getPermission()),BussinessUtil.PERNAME_REPETITION);
+        permissionByPer.copy(permission);
+        permissionByPer.setUpdateTime(LocalDateTime.now());
+        permissionRepository.updatePermission(permissionByPer);
     }
 
     @Override
@@ -48,9 +51,9 @@ public class PermissionServiceImpl implements IPermissionService {
     @Override
     public PageDomain pagingfindAll(int total, int pagesize) {
         int size = permissionRepository.findAll().size();
+        BussinessUtil.pagingfind((size/pagesize)+1 < total);
         List users = permissionRepository.pagingfindPer(total, pagesize);
         return new PageDomain(total, pagesize, size, users);
-
     }
 
     @Override

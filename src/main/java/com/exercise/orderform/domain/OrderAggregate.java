@@ -4,11 +4,11 @@ import com.exercise.event.DomainEventBusHolder;
 import com.exercise.event.eventinterface.Aggregate;
 import com.exercise.event.handler.DomainEventPublisher;
 import com.exercise.orderform.event.OrderPaymentEvent;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-
+@Component
 public class OrderAggregate implements Aggregate {
 
     private Orders orders;

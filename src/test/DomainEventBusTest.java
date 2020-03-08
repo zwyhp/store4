@@ -57,4 +57,20 @@ public class DomainEventBusTest {
             this.data = event.getData();
         }
     }
+
+    @Test
+    public void test(){
+        int[] nums = {0,0,1,1,2,2};
+        int len = nums.length;
+        int m = 0;
+        for(int i = 0;i < len ; i++){
+            if (nums[m] != nums[i]){
+                nums[++m] = nums[i];
+            }
+        }
+
+        for (int i = 0;i<m ;i++){
+            System.out.println(nums[i]);
+        }
+    }
 }

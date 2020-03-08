@@ -1,6 +1,6 @@
 package com.exercise.log.repository;
 
-import com.exercise.log.domin.LogDomin;
+import com.exercise.log.domain.LogDomin;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.NativeQuery;

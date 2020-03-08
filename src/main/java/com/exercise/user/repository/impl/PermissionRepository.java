@@ -1,7 +1,8 @@
-package com.exercise.user.repository;
+package com.exercise.user.repository.impl;
 
 
 import com.exercise.user.domain.Permission;
+import com.exercise.user.repository.IPermissionRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.NativeQuery;
@@ -39,10 +40,12 @@ public class PermissionRepository implements IPermissionRepository {
 
     @Override
     public Permission findPermissionByPer(String permissionname) {
-        String sql = "select * FROM permission WHERE permissionname  =" + permissionname + "";
-        NativeQuery nativeQuery = currentSession().createNativeQuery(sql, Permission.class);
-        Permission permission = (Permission) nativeQuery.list().get(0);
-        return permission;
+        String sql = "SELECT * FROM permission where permission = :permission";
+        List users = currentSession().createNativeQuery(sql)
+                .addEntity(Permission.class)
+                .setParameter("permission", permissionname)
+                .list();
+        return users.isEmpty() ? null : (Permission) users.get(0);
     }
 
     @Override

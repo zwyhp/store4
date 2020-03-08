@@ -1,7 +1,7 @@
 package com.exercise.log.service;
 
 import com.exercise.domain.PageDomain;
-import com.exercise.log.domin.LogDomin;
+import com.exercise.log.domain.LogDomin;
 import com.exercise.log.repository.IlogRePository;
 import com.exercise.util.BussinessUtil;
 import org.springframework.beans.factory.annotation.Autowired;

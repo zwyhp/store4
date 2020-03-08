@@ -1,8 +1,6 @@
 package com.exercise.util;
 
-import org.springframework.data.domain.Page;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -66,8 +64,8 @@ public class ResponseUtil {
         return obj;
     }
 
-    public static Object badArgument() {
-        return fail(401, "参数不对");
+    public static Object badArgument(String error) {
+        return fail(401, error);
     }
 
     public static Object badArgumentValue() {

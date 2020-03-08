@@ -1,8 +1,9 @@
-package com.exercise.user.service;
+package com.exercise.user.service.impl;
 
 import com.exercise.domain.PageDomain;
 import com.exercise.user.domain.User;
 import com.exercise.user.repository.IuserRepository;
+import com.exercise.user.service.IuserService;
 import com.exercise.util.BussinessUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,8 +22,8 @@ public class UserServiceImpl implements IuserService {
     @Override
     public int addObject(User user) {
         User userByname = iuserRepository.findUserByname(user.getUsername());
-        BussinessUtil.isNull(userByname,BussinessUtil.USERNAME_REPETITION);
-        user.setCreatetime(LocalDateTime.now());
+        BussinessUtil.isnotNull(userByname,BussinessUtil.USERNAME_REPETITION);
+        user.setCreateTime(LocalDateTime.now());
         int id = iuserRepository.save(user);
         return id;
     }
@@ -36,9 +37,11 @@ public class UserServiceImpl implements IuserService {
 
     @Override
     public void updateObjectById(User user) {
-        User userByname = iuserRepository.findUserById(user.getId());
-        BussinessUtil.isNull(userByname,BussinessUtil.USER_INEXISTENCE);
-        iuserRepository.updateUserByid(user);
+        User userById = iuserRepository.findUserById(user.getId());
+        BussinessUtil.isNull(userById,BussinessUtil.USER_INEXISTENCE);
+        BussinessUtil.isnotNull(iuserRepository.findUserByname(user.getUsername()),BussinessUtil.USERNAME_REPETITION);
+        userById.copy(user);
+        iuserRepository.updateUser(userById);
     }
 
     @Override
@@ -49,6 +52,7 @@ public class UserServiceImpl implements IuserService {
     @Override
     public PageDomain pagingfindAll(int total, int pagesize) {
         int size = iuserRepository.findAll().size();
+        BussinessUtil.pagingfind((size/pagesize)+1 < total);
         List users = iuserRepository.pagingfindUser(total, pagesize);
         return new PageDomain(total, pagesize, size, users);
     }
@@ -64,8 +68,8 @@ public class UserServiceImpl implements IuserService {
         return iuserRepository.conditionsQuery(username);
     }
 
-    public List conditionsQuery(String username ,int roleid){
-        return iuserRepository.conditionsQuery(username,roleid);
+    public List conditionsQuery(int roleId){
+        return iuserRepository.conditionsQuery(roleId);
     }
 
 

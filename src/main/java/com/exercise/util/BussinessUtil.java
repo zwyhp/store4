@@ -1,7 +1,5 @@
 package com.exercise.util;
 
-import com.exercise.controller.BussinessException;
-
 public class BussinessUtil {
     public static final String USER_INEXISTENCE = "用户不存在";
     public static final String ROLE_INEXISTENCE = "角色不存在";
@@ -28,8 +26,19 @@ public class BussinessUtil {
             throw new BussinessException(error);
         }
     }
+    public static void isnotNull(Object object, String error){
+        if (object != null){
+            throw new BussinessException(error);
+        }
+    }
 
     public static void error(String error){
         throw new BussinessException(error);
+    }
+
+    public static void pagingfind(boolean judge){
+        if (judge){
+            throw new BussinessException("当前页码超出总页数");
+        }
     }
 }

@@ -4,10 +4,13 @@ import com.exercise.domain.PageDomain;
 import com.exercise.product.domain.Products;
 import com.exercise.product.repository.IProductsRepository;
 import com.exercise.util.BussinessUtil;
+import com.exercise.util.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -19,7 +22,7 @@ public class ProductServiceImpl implements IProductService{
     @Override
     public int addObject(Products products) {
         Products productsByname = productsRepository.findProductsByname(products.getName());
-        BussinessUtil.isNull(productsByname,BussinessUtil.PRODUCTNAME_REPETITION);
+        BussinessUtil.isnotNull(productsByname,BussinessUtil.PRODUCTNAME_REPETITION);
         return productsRepository.save(products);
     }
 
@@ -34,7 +37,9 @@ public class ProductServiceImpl implements IProductService{
     public void updateObjectById(Products product) {
         Products objectById = findObjectById(product.getId());
         BussinessUtil.isNull(objectById,BussinessUtil.PRODUCT_INEXISTENCE);
-        productsRepository.updateProductsByid(product);
+        BussinessUtil.isnotNull(productsRepository.findProductsByname(product.getName()),BussinessUtil.PRODUCTNAME_REPETITION);
+        objectById.copy(product);
+        productsRepository.updateProductsByid(objectById);
     }
 
     @Override
@@ -45,6 +50,7 @@ public class ProductServiceImpl implements IProductService{
     @Override
     public PageDomain pagingfindAll(int total, int pagesize) {
         int size = productsRepository.findAll().size();
+        BussinessUtil.pagingfind((size/pagesize)+1 < total);
         List users = productsRepository.pagingfindProducts(total, pagesize);
         return new PageDomain(total, pagesize, size, users);
     }
@@ -65,5 +71,16 @@ public class ProductServiceImpl implements IProductService{
         objectById.setPnum(newnum);
         productsRepository.updateProductsByid(objectById);
         return true;
+    }
+
+    public void updateImgByid(int id, MultipartFile file) throws IOException {
+        String fileMD5name = FileUtil.GetFileMD5name(file);
+        Products product = productsRepository.findImgByMD5Name(fileMD5name);
+        if (product == null){
+            String url = FileUtil.uploadFile(file);
+            productsRepository.updateImgByid(id,url);
+        }else{
+            productsRepository.updateImgByid(id,product.getImgurl());
+        }
     }
 }

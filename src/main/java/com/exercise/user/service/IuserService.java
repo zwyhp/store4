@@ -26,5 +26,5 @@ public interface IuserService extends IService<User> {
 
      List conditionsQuery(String username);
 
-     List conditionsQuery(String username ,int roleid);
+     List conditionsQuery(int roleid);
 }

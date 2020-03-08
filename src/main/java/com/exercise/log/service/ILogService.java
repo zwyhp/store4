@@ -2,10 +2,9 @@ package com.exercise.log.service;
 
 import com.exercise.domain.PageDomain;
 import com.exercise.interfaceI.IService;
-import com.exercise.log.domin.LogDomin;
+import com.exercise.log.domain.LogDomin;
 
 import java.util.List;
-import java.util.Map;
 
 public interface ILogService extends IService<LogDomin> {
 

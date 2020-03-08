@@ -2,34 +2,42 @@ package com.exercise.product.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
+import org.hibernate.validator.constraints.NotEmpty;
+import com.exercise.util.verify.VerifyError;
+import com.exercise.util.verify.VerifyUpdate;
 
 @Entity
 @Table(name = "products")
 public class Products {
     @Id
     @GeneratedValue
+    @NotNull(message = VerifyError.ID_NOT_NULL,groups = {VerifyUpdate.class})
     @Column(name = "id")
     private int id;
-    @Null
+
+    @NotNull(message = VerifyError.PRODUCT_UID_NOT_NULL)
     @Column(name ="u_id")
     private int uId;
-    @NotNull
+
+    @NotEmpty(message = VerifyError.PRODUCT_NAME_NOT_NULL)
     @Column(name = "name")
     private String name;
-    @NotNull
+
+    @NotNull(message = VerifyError.PRODUCT_PRICE_NOT_NULL)
     @Column(name = "price")
     private double price;
-    @NotNull
+
+    @NotEmpty(message = VerifyError.PRODUCT_CATEGOTY_NOT_NULL)
     @Column(name = "categoty")
     private String categoty;
-    @NotNull
+
+    @NotNull(message = VerifyError.PRODUCT_PNUM_NOT_NULL)
     @Column(name = "pnum")
     private int pnum;
-    @NotNull
+
     @Column(name = "imgurl")
     private String imgurl;
-    @NotNull
+
     @Column(name = "description")
     private String description;
 
@@ -109,5 +117,15 @@ public class Products {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public void copy(Products products){
+        this.uId = products.uId;
+        this.name = products.name;
+        this.price = products.price;
+        this.categoty = products.categoty;
+        this.pnum = products.pnum;
+        this.imgurl = products.imgurl;
+        this.description = products.description;
     }
 }

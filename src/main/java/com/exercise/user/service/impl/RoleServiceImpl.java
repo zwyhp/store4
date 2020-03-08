@@ -1,25 +1,31 @@
-package com.exercise.user.service;
+package com.exercise.user.service.impl;
 
 import com.exercise.domain.PageDomain;
 import com.exercise.user.domain.Role;
 import com.exercise.user.repository.IRoleRepository;
+import com.exercise.user.service.IroleService;
 import com.exercise.util.BussinessUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Service
+@Transactional
 public class RoleServiceImpl implements IroleService {
     @Autowired
     private IRoleRepository roleRepository;
     @Override
     public int addObject(Role role) {
         Role roleByname = roleRepository.findRoleByname(role.getName());
-        BussinessUtil.isNull(roleByname,BussinessUtil.ROLENAME_REPETITION);
+        BussinessUtil.isnotNull(roleByname,BussinessUtil.ROLENAME_REPETITION);
         role.setEnable(1);
         role.setCreateTime(LocalDateTime.now());
         role.setUpdateTime(LocalDateTime.now());
-        return roleRepository.save(role);
+        int save = roleRepository.save(role);
+        return save;
     }
 
     @Override
@@ -34,7 +40,10 @@ public class RoleServiceImpl implements IroleService {
     public void updateObjectById(Role role) {
         Role roleById = roleRepository.findRoleById(role.getId());
         BussinessUtil.isNull(roleById,BussinessUtil.ROLE_INEXISTENCE);
-        roleRepository.updateRoleByid(role);
+        BussinessUtil.isnotNull(roleRepository.findRoleByname(role.getName()),BussinessUtil.ROLENAME_REPETITION);
+        roleById.copy(role);
+        roleById.setUpdateTime(LocalDateTime.now());
+        roleRepository.updateRoleByid(roleById);
     }
 
     @Override
@@ -45,6 +54,7 @@ public class RoleServiceImpl implements IroleService {
     @Override
     public PageDomain pagingfindAll(int total, int pagesize) {
         int size = roleRepository.findAll().size();
+        BussinessUtil.pagingfind((size/pagesize)+1 < total);
         List users = roleRepository.pagingfindRole(total, pagesize);
         return new PageDomain(total, pagesize, size, users);
 

@@ -1,23 +1,35 @@
 package com.exercise.user.domain;
 
+import com.exercise.util.verify.VerifyError;
+import com.exercise.util.verify.VerifyUpdate;
+import org.hibernate.validator.constraints.NotEmpty;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "role")
+@Table(name = "srole")
 public class Role {
     @Id
     @GeneratedValue
+    @NotNull(message = VerifyError.ID_NOT_NULL ,groups = {VerifyUpdate.class})
     @Column(name = "id")
     private int id;
-    @Column(name = "name")
+
+    @NotEmpty(message = VerifyError.ROLE_NAME_NOT_NULL)
+    @Column(name = "rname")
     private String name;
-    @Column(name = "desc")
+
+    @NotEmpty(message = VerifyError.ROLE_DESC_NOT_NULL)
+    @Column(name = "rdesc")
     private String desc;
-    @Column(name = "enable")
+
+    @Column(name = "renable")
     private int enable;
+
     @Column(name = "create_time")
     private LocalDateTime createTime;
+
     @Column(name = "update_time")
     private LocalDateTime updateTime;
 
@@ -79,5 +91,11 @@ public class Role {
 
     public void setUpdateTime(LocalDateTime updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public void copy(Role role){
+        this.name = role.name;
+        this.desc = role.desc;
+        this.enable = role.enable;
     }
 }
