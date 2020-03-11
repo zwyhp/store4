@@ -95,10 +95,11 @@ public class ProductsRepository implements IProductsRepository{
     @Override
     public Products findImgByMD5Name(String MD5name) {
         String sql = "SELECT * FROM Products where imgurl like :md5name";
-        return (Products)currentSession().createNativeQuery(sql)
+        List md5name = currentSession().createNativeQuery(sql)
                 .addEntity(Products.class)
-                .setParameter("md5name","%"+MD5name+"%")
-                .list().get(0);
+                .setParameter("md5name", "%" + MD5name + "%")
+                .list();
+        return md5name.isEmpty() ? null : (Products)md5name.get(0);
     }
 
 }

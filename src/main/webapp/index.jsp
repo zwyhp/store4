@@ -12,5 +12,10 @@
 </head>
 <body>
 <a href="test18">123456</a>
+
+<form action="updateimg" method="post" enctype="multipart/form-data">
+    <input type="hidden" value="1" name="id" />
+    <input type="file" name="file" />  <input type="submit" value="更新图片">
+</form>
 </body>
 </html>

@@ -82,5 +82,13 @@ public class PermissionRepository implements IPermissionRepository {
                 .list();
         return list;
     }
+    public List findPermissionByRoleId(int id){
+        String sql = "SELECT * FROM permission where role_id = :roleid";
+        List list = currentSession().createNativeQuery(sql)
+                .addEntity(Permission.class)
+                .setParameter("roleid",id)
+                .list();
+        return list;
+    }
 
 }

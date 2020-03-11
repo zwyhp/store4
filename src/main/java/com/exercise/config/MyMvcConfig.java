@@ -24,14 +24,17 @@ import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
 import java.util.Properties;
 
-@EnableTransactionManagement
+
+
 @Configuration
 @EnableWebMvc
 @EnableAspectJAutoProxy
 @ComponentScan(basePackages = {"com.exercise"})
+@EnableTransactionManagement
 public class MyMvcConfig extends WebMvcConfigurerAdapter {
-//   @Resource
-//    DBConfig dbConfig;
+   /*@Resource
+    DBConfig dbConfig;
+*/
 
     @Bean
     public InternalResourceViewResolver viewResolver() {
@@ -46,6 +49,8 @@ public class MyMvcConfig extends WebMvcConfigurerAdapter {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/static/**").addResourceLocations("/WEB-INF/static/");
     }
+
+
     /*配置cors跨域问题*/
     @Override
     public void addCorsMappings(CorsRegistry registry) {
@@ -62,6 +67,7 @@ public class MyMvcConfig extends WebMvcConfigurerAdapter {
         return resourceBundleMessageSource;
     }
 
+    /*数据校验*/
     @Bean
     @Primary
     public LocalValidatorFactoryBean validator() {
@@ -71,7 +77,7 @@ public class MyMvcConfig extends WebMvcConfigurerAdapter {
         return validatorFactoryBean;
     }
 
-
+    /*地区拦截器*/
     @Bean
     public LocaleChangeInterceptor localeChangeInterceptor(){
         LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
@@ -79,6 +85,14 @@ public class MyMvcConfig extends WebMvcConfigurerAdapter {
         return localeChangeInterceptor;
     }
 
+    //配置事务管理
+    @Bean
+    public HibernateTransactionManager transactionManager(SessionFactory sessionFactory)
+    {
+        HibernateTransactionManager transactionManager = new HibernateTransactionManager();
+        transactionManager.setSessionFactory(sessionFactory);
+        return transactionManager;
+    }
 
     /*配置拦截器*/
     /*@Override
@@ -90,7 +104,7 @@ public class MyMvcConfig extends WebMvcConfigurerAdapter {
         super.addInterceptors(registry);
     }*/
 
-
+    /*配置文件上传*/
     @Bean
     public MultipartResolver multipartResolver(){
         CommonsMultipartResolver commonsMultipartResolver = new CommonsMultipartResolver();
@@ -108,14 +122,6 @@ public class MyMvcConfig extends WebMvcConfigurerAdapter {
         return dataSource;
     }
 
-    //配置事务管理
-    @Bean
-    public HibernateTransactionManager transactionManager(SessionFactory sessionFactory)
-    {
-        HibernateTransactionManager transactionManager = new HibernateTransactionManager();
-        transactionManager.setSessionFactory(sessionFactory);
-        return transactionManager;
-    }
 
 
     @Bean
@@ -133,8 +139,6 @@ public class MyMvcConfig extends WebMvcConfigurerAdapter {
         sfb.setHibernateProperties(properties);
         return sfb;
     }
-
-
 
 }
 

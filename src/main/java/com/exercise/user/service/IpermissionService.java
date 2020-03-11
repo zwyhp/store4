@@ -24,4 +24,6 @@ public interface IpermissionService extends IService<Permission> {
 
     @Override
     Permission findObjectById(int id);
+
+    List<Permission> findPermissionByRoleId(int id);
 }

@@ -62,4 +62,10 @@ public class PermissionServiceImpl implements IpermissionService {
         BussinessUtil.isNull(permissionByPer,BussinessUtil.PER_INEXISTENCE);
         return permissionByPer;
     }
+
+    @Override
+    public List<Permission> findPermissionByRoleId(int id){
+        List<Permission> permissions = (List<Permission>)permissionRepository.findPermissionByRoleId(id);
+        return permissions;
+    }
 }

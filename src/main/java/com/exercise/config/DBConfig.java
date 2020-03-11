@@ -4,10 +4,8 @@ package com.exercise.config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.stereotype.Component;
 
 @Configuration
-@Component
 @PropertySource(value = "classpath:jdbc.properties",encoding = "UTF-8")
 public class DBConfig {
     @Value("${db.driverClass}")

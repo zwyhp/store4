@@ -1,5 +1,6 @@
 package com.exercise.config;
 
+import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
@@ -18,10 +19,20 @@ public class WebInitializer extends AbstractAnnotationConfigDispatcherServletIni
 
     @Override
     protected String[] getServletMappings() {
-        return new String[]{"/"};
+        return new String[]{"/*","/"};
     }
     @Override
     protected Filter[] getServletFilters() {
-        return new Filter[]{new HiddenHttpMethodFilter()};
+        return new Filter[]{delegatingFilterProxy(), new HiddenHttpMethodFilter()};
     }
+
+
+    protected DelegatingFilterProxy delegatingFilterProxy(){
+        DelegatingFilterProxy delegatingFilterProxy = new DelegatingFilterProxy();
+        delegatingFilterProxy.setTargetBeanName("shiroFilter");
+        delegatingFilterProxy.setTargetFilterLifecycle(true);
+       return delegatingFilterProxy;
+   }
+
+
 }

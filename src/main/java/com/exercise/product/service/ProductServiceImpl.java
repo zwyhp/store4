@@ -77,7 +77,7 @@ public class ProductServiceImpl implements IProductService{
         String fileMD5name = FileUtil.GetFileMD5name(file);
         Products product = productsRepository.findImgByMD5Name(fileMD5name);
         if (product == null){
-            String url = FileUtil.uploadFile(file);
+            String url = FileUtil.uploadFile1(file);
             productsRepository.updateImgByid(id,url);
         }else{
             productsRepository.updateImgByid(id,product.getImgurl());

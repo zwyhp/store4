@@ -19,4 +19,6 @@ public interface IPermissionRepository {
     List<Permission> findAll();
 
     List pagingfindPer(int total, int pagesize);
+
+    List findPermissionByRoleId(int id);
 }

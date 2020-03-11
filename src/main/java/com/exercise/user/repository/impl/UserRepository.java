@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import java.io.Serializable;
 import java.util.List;
 
+
 @Repository
 public class UserRepository implements IuserRepository {
 

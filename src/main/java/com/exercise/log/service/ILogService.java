@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface ILogService extends IService<LogDomin> {
 
+    void addLog(String action,String username);
     @Override
     int addObject(LogDomin logDomin);
 

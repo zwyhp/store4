@@ -4,42 +4,33 @@ package com.exercise.util;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.imageio.ImageIO;
-import java.awt.*;
 import java.io.*;
 
 public class FileUtil {
 
-    public static String uploadFile(MultipartFile file) throws IOException {
-        OutputStream out = null;
-        InputStream input = null;
-        byte[] bs = new byte[1024];
-        int len = -1;
+    public static String uploadFile1(MultipartFile file) throws IOException{
         String filename = null;
-
+        String suffix = null;
+        InputStream inputStream = null;
         try {
-            input = file.getInputStream();
-            Image image = ImageIO.read(input);
-            if (image == null) {
-                throw new BussinessException("文件类型错误");
-            }
-            filename = DigestUtils.md5Hex(input);
-            out = new FileOutputStream("F:\\imgs" + filename);
-            while ((len = input.read(bs)) != -1) {
-                out.write(bs, 0, len);
-            }
-        } finally {
-            if (out != null)
-                out.close();
-            if (input != null)
-                input.close();
-
-            return "F:\\imgs" + filename;
+            inputStream = file.getInputStream();
+        filename = DigestUtils.md5Hex(inputStream);
+        String name = file.getOriginalFilename();
+        suffix = name.substring(name.lastIndexOf("."));
+        File writeFile = new File("F:\\imgs\\" + filename + suffix);
+        file.transferTo(writeFile);
+        }finally {
+           if (inputStream != null )
+               inputStream.close();
         }
+        return "F:\\imgs\\" + filename + suffix;
     }
-        public static String GetFileMD5name(MultipartFile file) throws IOException {
 
-            return DigestUtils.md5Hex(file.getInputStream());
 
-        }
+
+    public static String GetFileMD5name(MultipartFile file) throws IOException {
+        InputStream inputStream = file.getInputStream();
+        return DigestUtils.md5Hex(inputStream);
     }
+
+}

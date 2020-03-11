@@ -23,6 +23,7 @@ public class UserServiceImpl implements IuserService {
     public int addObject(User user) {
         User userByname = iuserRepository.findUserByname(user.getUsername());
         BussinessUtil.isnotNull(userByname,BussinessUtil.USERNAME_REPETITION);
+        user.setRoleId(3);
         user.setCreateTime(LocalDateTime.now());
         int id = iuserRepository.save(user);
         return id;
@@ -72,5 +73,8 @@ public class UserServiceImpl implements IuserService {
         return iuserRepository.conditionsQuery(roleId);
     }
 
+    public User findUserByname(String username){
+        return iuserRepository.findUserByname(username);
+    }
 
 }

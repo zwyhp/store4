@@ -25,4 +25,6 @@ public interface IuserRepository {
     List conditionsQuery(String username);
 
     List conditionsQuery(int roleid);
+
+
 }

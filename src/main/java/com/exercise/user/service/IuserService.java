@@ -27,4 +27,6 @@ public interface IuserService extends IService<User> {
      List conditionsQuery(String username);
 
      List conditionsQuery(int roleid);
+
+     User findUserByname(String username);
 }
