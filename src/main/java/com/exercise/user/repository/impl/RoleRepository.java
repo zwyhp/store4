@@ -73,13 +73,14 @@ public class RoleRepository implements IRoleRepository {
     }
 
     @Override
-    public List pagingfindRole(int total, int pagesize) {
+    public List pagingFindRole(int total, int pagesize) {
         String sql = "SELECT * FROM srole";
-        List list = currentSession().createNativeQuery(sql)
+        return currentSession().createNativeQuery(sql)
                 .addEntity(Role.class)
                 .setFirstResult(total - 1)
                 .setMaxResults(pagesize)
                 .list();
-        return list;
     }
+
+
 }

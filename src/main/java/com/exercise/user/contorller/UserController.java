@@ -1,7 +1,7 @@
 package com.exercise.user.contorller;
 
 import com.exercise.domain.PageDomain;
-import com.exercise.log.Log;
+import com.exercise.interfaceI.NotLog;
 import com.exercise.user.domain.User;
 import com.exercise.user.service.IuserService;
 import com.exercise.util.ResponseUtil;
@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import javax.validation.constraints.NotNull;
 
 @RestController
 public class UserController {
@@ -24,8 +24,8 @@ public class UserController {
     @Autowired
     private IuserService userService;
 
-    @Log(ignore = false)
-    @RequestMapping("/login")
+    @NotLog
+    @GetMapping("/login")
     public Object user(){
         return ResponseUtil.unlogin();
     }
@@ -39,6 +39,7 @@ public class UserController {
         return ResponseUtil.ok("登录成功");
     }
 
+    @NotLog
     @GetMapping("/doLogout")
     public Object logout(){
         //使用权限管理工具进行用户的退出，跳出登录，给出提示信息
@@ -68,8 +69,6 @@ public class UserController {
         return i>0? ResponseUtil.ok():ResponseUtil.fail();
     }
 
-
-
     @RequiresPermissions("user:user")
     @PutMapping("/admin/user")
     public Object updeteUser(@RequestBody @Validated(VerifyUpdate.class) User user){
@@ -87,6 +86,7 @@ public class UserController {
         return ResponseUtil.ok();
     }
 
+    @NotLog
     @RequiresPermissions("admin:user")
     @GetMapping("/admin/users")
     public Object user(@RequestParam(value = "pagenum",defaultValue = "1") int pagenum,
@@ -94,20 +94,21 @@ public class UserController {
         if (pagenum <= 0 ){
             return ResponseUtil.badArgument("页码必须为整数");
         }
-        PageDomain pageDomain = userService.pagingfindAll(pagenum, pagesize);
+        PageDomain pageDomain = userService.pagingFindAll(pagenum, pagesize);
         return ResponseUtil.ok(pageDomain);
     }
 
     /**
-     * 根据角色id或者name查询
+     * 根据角色id查询
      * @param roleId
      * @return
      */
+    @NotLog
     @RequiresPermissions("admin:user")
     @GetMapping("/admin/conditions")
-    public Object user1(@RequestParam(value = "roleid",defaultValue = "1") int roleId){
-        List list = userService.conditionsQuery(roleId);
-        return list;
+    public Object user1(@NotNull int roleId){
+        return userService.conditionsQuery(roleId);
+
     }
 
 

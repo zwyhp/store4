@@ -29,8 +29,8 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/doLogin", "anon");
         filterChainDefinitionMap.put("/doRegister", "anon");
         filterChainDefinitionMap.put("/register", "anon");
-        // 配置退出 过滤器,其中的具体的退出代码Shiro已经替我们实现了
-        filterChainDefinitionMap.put("/doLogout", "logout");
+        /*// 配置退出 过滤器,其中的具体的退出代码Shiro已经替我们实现了
+        filterChainDefinitionMap.put("/doLogout", "logout");*/
         // 剩余请求需要身份认证
         filterChainDefinitionMap.put("/**", "authc");
         // 如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面
@@ -42,25 +42,32 @@ public class ShiroConfig {
         return shiroFilterFactoryBean;
     }
 
+    /**
+     * 配置自定义规则
+     * @param matcher
+     * @return
+     */
     @Bean(name = "myShiroRealm")
     public MyAuthorizingRealm myShiroRealm(HashedCredentialsMatcher matcher){
         MyAuthorizingRealm myShiroRealm = new MyAuthorizingRealm();
         myShiroRealm.setCredentialsMatcher(matcher);
         return myShiroRealm;
     }
+
+    /**
+     * 配置安全管理者
+     * @param matcher
+     * @return
+     */
     @Bean
     public SecurityManager defaultWebSecurityManager(@Qualifier("hashedCredentialsMatcher") HashedCredentialsMatcher matcher){
         DefaultWebSecurityManager securityManager =  new DefaultWebSecurityManager();
         securityManager.setRealm(myShiroRealm(matcher));
         return securityManager;
     }
-    @Bean
-    public LifecycleBeanPostProcessor lifecycleBeanPostProcessor(){
-        return new LifecycleBeanPostProcessor();
-    }
+
     /**
      * 密码匹配凭证管理器
-     *
      * @return
      */
     @Bean(name = "hashedCredentialsMatcher")
@@ -72,6 +79,15 @@ public class ShiroConfig {
         hashedCredentialsMatcher.setHashIterations(1024);
         return hashedCredentialsMatcher;
     }
+
+    @Bean
+    public LifecycleBeanPostProcessor lifecycleBeanPostProcessor(){
+        return new LifecycleBeanPostProcessor();
+    }
+    /**
+     * 配置shiro注解开启
+     * @return
+     */
     @Bean
     @DependsOn("lifecycleBeanPostProcessor")
     public DefaultAdvisorAutoProxyCreator advisorAutoProxyCreator() {

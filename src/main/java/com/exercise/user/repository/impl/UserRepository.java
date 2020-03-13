@@ -75,30 +75,30 @@ public class UserRepository implements IuserRepository {
 
     @Override
     public List pagingfindUser(int total, int pagesize) {
-        String sql = "SELECT * FROM user";
-        List list = currentSession().createNativeQuery(sql)
+        String sql = "SELECT * FROM user ";
+        return currentSession().createNativeQuery(sql)
                 .addEntity(User.class)
                 .setFirstResult(total - 1)
                 .setMaxResults(pagesize)
                 .list();
-        return list;
+
     }
 
     public List conditionsQuery(int roleid){
         String sql = "SELECT * FROM user where role_id = :roleid";
-        List list = currentSession().createNativeQuery(sql)
+        return currentSession().createNativeQuery(sql)
                 .addEntity(User.class)
                 .setParameter("roleid",roleid)
                 .list();
-        return list;
+
     }
     public List conditionsQuery(String username){
         String sql = "SELECT * FROM user where username like :username";
-        List list = currentSession().createNativeQuery(sql)
+        return currentSession().createNativeQuery(sql)
                 .addEntity(User.class)
                 .setParameter("username","%"+username+"%")
                 .list();
-        return list;
+
     }
 
 

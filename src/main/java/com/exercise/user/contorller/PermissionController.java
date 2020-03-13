@@ -1,6 +1,7 @@
 package com.exercise.user.contorller;
 
 import com.exercise.domain.PageDomain;
+import com.exercise.interfaceI.NotLog;
 import com.exercise.user.domain.Permission;
 import com.exercise.user.service.IpermissionService;
 import com.exercise.util.ResponseUtil;
@@ -39,6 +40,7 @@ public class PermissionController {
         return ResponseUtil.ok();
     }
 
+    @NotLog
     @GetMapping("/permissions")
     @RequiresPermissions("admin:permission")
     public Object permission(@RequestParam(value = "pagenum",defaultValue = "1") int pagenum,
@@ -46,7 +48,7 @@ public class PermissionController {
         if (pagenum <= 0 ){
             return ResponseUtil.badArgument("页码必须为整数");
         }
-        PageDomain pageDomain = permissionService.pagingfindAll(pagenum, pagesize);
+        PageDomain pageDomain = permissionService.pagingFindAll(pagenum, pagesize);
         return ResponseUtil.ok(pageDomain);
     }
 

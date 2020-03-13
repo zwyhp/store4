@@ -29,13 +29,12 @@ import java.util.Properties;
 @Configuration
 @EnableWebMvc
 @EnableAspectJAutoProxy
-@ComponentScan(basePackages = {"com.exercise"})
+@ComponentScan("com.exercise")
 @EnableTransactionManagement
 public class MyMvcConfig extends WebMvcConfigurerAdapter {
-   /*@Resource
+/*  @Resource
     DBConfig dbConfig;
 */
-
     @Bean
     public InternalResourceViewResolver viewResolver() {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
@@ -131,7 +130,8 @@ public class MyMvcConfig extends WebMvcConfigurerAdapter {
         sfb.setPackagesToScan("com.exercise.user.domain",
                 "com.exercise.orderform.domain",
                 "com.exercise.product.domain",
-                "com.exercise.log.domain");
+                "com.exercise.log.domain",
+                "com.exercise.shopcart.domain");
         Properties properties = new Properties();
         properties.setProperty("hibernate.dialect","org.hibernate.dialect.MySQL5Dialect");
         properties.setProperty("hibernate.show_sql","true");

@@ -1,15 +1,10 @@
 package com.exercise.log.Contorller;
 
 import com.exercise.domain.PageDomain;
-import com.exercise.log.domain.LogDomin;
 import com.exercise.log.service.ILogService;
 import com.exercise.util.ResponseUtil;
-import com.exercise.util.verify.VerifyUpdate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/admin")
@@ -30,7 +25,7 @@ public class LogController {
         if (pagenum <= 0 ){
             return ResponseUtil.badArgument("页码必须为整数");
         }
-        PageDomain pageDomain = logService.pagingfindAll(pagenum, pagesize);
+        PageDomain pageDomain = logService.pagingFindAll(pagenum, pagesize);
         return ResponseUtil.ok(pageDomain);
     }
 

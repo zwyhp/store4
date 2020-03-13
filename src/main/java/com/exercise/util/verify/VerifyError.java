@@ -30,6 +30,10 @@ public class VerifyError {
     public static final String ORDERITEM_PID_NOT_NULL = "商品ID不能为空";
     public static final String ORDERITEM_NUM_NOT_NULL = "商品数量不能为空";
 
+    public static final String CART_UID_NOT_NULL = "购物车的用户id不能为空";
+    public static final String CART_PID_NOT_NULL = "商品ID不能为空";
+    public static final String CART_NUM_NOT_NULL = "商品数量不能为空";
+
 
 
 

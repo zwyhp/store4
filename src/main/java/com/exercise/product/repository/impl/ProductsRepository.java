@@ -1,6 +1,7 @@
-package com.exercise.product.repository;
+package com.exercise.product.repository.impl;
 
 import com.exercise.product.domain.Products;
+import com.exercise.product.repository.IproductsRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class ProductsRepository implements IProductsRepository{
+public class ProductsRepository implements IproductsRepository {
 
     private SessionFactory sessionFactory;
 
@@ -29,7 +30,7 @@ public class ProductsRepository implements IProductsRepository{
     }
 
     @Override
-    public Products findProductsByname(String name) {
+    public Products findProductsByName(String name) {
         return null;
     }
 
@@ -39,13 +40,13 @@ public class ProductsRepository implements IProductsRepository{
     }
 
     @Override
-    public void deleteProductsByid(int id) {
+    public void deleteProductsById(int id) {
         Products productsById = findProductsById(id);
         currentSession().delete(productsById);
     }
 
     @Override
-    public void updateProductsByid(Products product) {
+    public void updateProductsById(Products product) {
         currentSession().update(product);
     }
 
@@ -58,7 +59,7 @@ public class ProductsRepository implements IProductsRepository{
     }
 
     @Override
-    public List pagingfindProducts(int total, int pagesize) {
+    public List pagingFindProducts(int total, int pagesize) {
         String sql = "SELECT * FROM Products";
         return currentSession().createNativeQuery(sql)
                 .addEntity(Products.class)
@@ -86,10 +87,10 @@ public class ProductsRepository implements IProductsRepository{
 
     }
 
-    public void updateImgByid(int id, String url){
+    public void updateImgById(int id, String url){
         Products productsById = findProductsById(id);
         productsById.setImgurl(url);
-        updateProductsByid(productsById);
+        updateProductsById(productsById);
     }
 
     @Override

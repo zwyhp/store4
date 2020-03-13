@@ -1,6 +1,7 @@
-package com.exercise.orderform.repository;
+package com.exercise.orderform.repository.impl;
 
 import com.exercise.orderform.domain.Orderitem;
+import com.exercise.orderform.repository.IOrderItemRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,25 +29,24 @@ public class OrderItemRepository implements IOrderItemRepository {
     }
 
     @Override
-    public void deleteOrderitemByOid(int oId) {
-        List orderitemByOid = findOrderitemByOid(oId);
-        for (Object orderitem: orderitemByOid){
-            currentSession().delete(orderitem);
+    public void deleteOrderItemByOid(int oId) {
+        List orderItemByOid = findOrderItemByOid(oId);
+        for (Object orderItem: orderItemByOid){
+            currentSession().delete(orderItem);
         }
     }
 
     @Override
-    public void updateOrderitem(Orderitem orderitem) {
+    public void updateOrderItem(Orderitem orderitem) {
         currentSession().update(orderitem);
     }
 
     @Override
-    public List findOrderitemByOid(int oId) {
+    public List findOrderItemByOid(int oId) {
         String sql = "SELECT * FROM Orderitem where order_id = :o_id";
-        List list = currentSession().createNativeQuery(sql)
+        return currentSession().createNativeQuery(sql)
                 .addEntity(Orderitem.class)
                 .setParameter("o_id",oId)
                 .list();
-        return list;
     }
 }

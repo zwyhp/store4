@@ -20,7 +20,7 @@ public interface IpermissionService extends IService<Permission> {
     List findAll();
 
     @Override
-    PageDomain pagingfindAll(int total, int pagesize);
+    PageDomain pagingFindAll(int total, int pagesize);
 
     @Override
     Permission findObjectById(int id);

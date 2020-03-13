@@ -22,7 +22,7 @@ public interface ILogService extends IService<LogDomin> {
     List<LogDomin> findAll();
 
     @Override
-    PageDomain pagingfindAll(int pagenum, int pagesize);
+    PageDomain pagingFindAll(int pagenum, int pagesize);
 
     @Override
     LogDomin findObjectById(int id);

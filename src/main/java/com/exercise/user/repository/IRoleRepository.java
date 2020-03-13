@@ -1,7 +1,6 @@
 package com.exercise.user.repository;
 
 
-
 import com.exercise.user.domain.Role;
 
 import java.util.List;
@@ -21,5 +20,6 @@ public interface IRoleRepository {
 
     List findAll();
 
-    List pagingfindRole(int total, int pagesize);
+    List pagingFindRole(int total, int pagesize);
+
 }

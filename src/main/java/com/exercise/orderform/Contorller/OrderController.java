@@ -2,7 +2,7 @@ package com.exercise.orderform.Contorller;
 
 import com.exercise.domain.PageDomain;
 import com.exercise.orderform.domain.OrderAggregate;
-import com.exercise.orderform.service.IOrdersService;
+import com.exercise.orderform.service.IordersService;
 import com.exercise.util.ResponseUtil;
 import com.exercise.util.verify.VerifyUpdate;
 import org.apache.shiro.authz.annotation.Logical;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class OrderController {
     @Autowired
-    private IOrdersService ordersService;
+    private IordersService ordersService;
 
     @PostMapping("order")
     @RequiresPermissions("user:user")
@@ -46,7 +46,7 @@ public class OrderController {
         if (pagenum <= 0 ){
             return ResponseUtil.badArgument("页码必须为正数");
         }
-        PageDomain pageDomain = ordersService.pagingfindAll(pagenum, pagesize);
+        PageDomain pageDomain = ordersService.pagingFindAll(pagenum, pagesize);
         return ResponseUtil.ok(pageDomain);
     }
 

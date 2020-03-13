@@ -19,7 +19,7 @@ public interface IuserService extends IService<User> {
      List findAll();
 
      @Override
-     PageDomain pagingfindAll(int pagenum, int pagesize);
+     PageDomain pagingFindAll(int pagenum, int pagesize);
 
      @Override
      User findObjectById(int id);

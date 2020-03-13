@@ -2,7 +2,7 @@ package com.exercise.product.Contorller;
 
 import com.exercise.domain.PageDomain;
 import com.exercise.product.domain.Products;
-import com.exercise.product.service.IProductService;
+import com.exercise.product.service.IproductService;
 import com.exercise.util.ResponseUtil;
 import com.exercise.util.verify.VerifyUpdate;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -18,7 +18,7 @@ import java.io.IOException;
 public class ProductController {
 
     @Autowired
-    private IProductService productService;
+    private IproductService productService;
     private int id;
 
     @PostMapping("/product")
@@ -48,7 +48,7 @@ public class ProductController {
         if (pagenum <= 0 ){
             return ResponseUtil.badArgument("页码必须为正数");
         }
-        PageDomain pageDomain = productService.pagingfindAll(pagenum, pagesize);
+        PageDomain pageDomain = productService.pagingFindAll(pagenum, pagesize);
         return ResponseUtil.ok(pageDomain);
     }
 

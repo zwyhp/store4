@@ -1,8 +1,9 @@
-package com.exercise.product.service;
+package com.exercise.product.service.impl;
 
 import com.exercise.domain.PageDomain;
 import com.exercise.product.domain.Products;
-import com.exercise.product.repository.IProductsRepository;
+import com.exercise.product.repository.IproductsRepository;
+import com.exercise.product.service.IproductService;
 import com.exercise.util.BussinessUtil;
 import com.exercise.util.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,13 +16,13 @@ import java.util.List;
 
 @Service
 @Transactional
-public class ProductServiceImpl implements IProductService{
+public class ProductServiceImpl implements IproductService {
     @Autowired
-    private IProductsRepository productsRepository;
+    private IproductsRepository productsRepository;
 
     @Override
     public int addObject(Products products) {
-        Products productsByname = productsRepository.findProductsByname(products.getName());
+        Products productsByname = productsRepository.findProductsByName(products.getName());
         BussinessUtil.isnotNull(productsByname,BussinessUtil.PRODUCTNAME_REPETITION);
         return productsRepository.save(products);
     }
@@ -30,16 +31,16 @@ public class ProductServiceImpl implements IProductService{
     public void deleteObjectById(int id) {
         Products objectById = findObjectById(id);
         BussinessUtil.isNull(objectById,BussinessUtil.PRODUCT_INEXISTENCE);
-        productsRepository.deleteProductsByid(id);
+        productsRepository.deleteProductsById(id);
     }
 
     @Override
     public void updateObjectById(Products product) {
         Products objectById = findObjectById(product.getId());
         BussinessUtil.isNull(objectById,BussinessUtil.PRODUCT_INEXISTENCE);
-        BussinessUtil.isnotNull(productsRepository.findProductsByname(product.getName()),BussinessUtil.PRODUCTNAME_REPETITION);
+        BussinessUtil.isnotNull(productsRepository.findProductsByName(product.getName()),BussinessUtil.PRODUCTNAME_REPETITION);
         objectById.copy(product);
-        productsRepository.updateProductsByid(objectById);
+        productsRepository.updateProductsById(objectById);
     }
 
     @Override
@@ -48,11 +49,11 @@ public class ProductServiceImpl implements IProductService{
     }
 
     @Override
-    public PageDomain pagingfindAll(int total, int pagesize) {
+    public PageDomain pagingFindAll(int total, int pageSize) {
         int size = productsRepository.findAll().size();
-        BussinessUtil.pagingfind((size/pagesize)+1 < total);
-        List users = productsRepository.pagingfindProducts(total, pagesize);
-        return new PageDomain(total, pagesize, size, users);
+        BussinessUtil.pagingfind((size/ pageSize)+1 < total);
+        List users = productsRepository.pagingFindProducts(total, pageSize);
+        return new PageDomain(total, pageSize, size, users);
     }
 
     @Override
@@ -69,7 +70,7 @@ public class ProductServiceImpl implements IProductService{
             BussinessUtil.error(BussinessUtil.UNDER_STOCK);
         }
         objectById.setPnum(newnum);
-        productsRepository.updateProductsByid(objectById);
+        productsRepository.updateProductsById(objectById);
         return true;
     }
 
@@ -78,9 +79,9 @@ public class ProductServiceImpl implements IProductService{
         Products product = productsRepository.findImgByMD5Name(fileMD5name);
         if (product == null){
             String url = FileUtil.uploadFile1(file);
-            productsRepository.updateImgByid(id,url);
+            productsRepository.updateImgById(id,url);
         }else{
-            productsRepository.updateImgByid(id,product.getImgurl());
+            productsRepository.updateImgById(id,product.getImgurl());
         }
     }
 }

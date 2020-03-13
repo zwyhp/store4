@@ -51,7 +51,7 @@ public class UserServiceImpl implements IuserService {
     }
 
     @Override
-    public PageDomain pagingfindAll(int total, int pagesize) {
+    public PageDomain pagingFindAll(int total, int pagesize) {
         int size = iuserRepository.findAll().size();
         BussinessUtil.pagingfind((size/pagesize)+1 < total);
         List users = iuserRepository.pagingfindUser(total, pagesize);

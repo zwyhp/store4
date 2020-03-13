@@ -4,7 +4,7 @@ package com.exercise.orderform.event;
 import com.exercise.event.handler.DomainEventHandler;
 import com.exercise.orderform.domain.OrderAggregate;
 import com.exercise.orderform.domain.Orderitem;
-import com.exercise.product.service.IProductService;
+import com.exercise.product.service.IproductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +16,7 @@ import java.util.List;
 @Component
 public class OrderPaymentEventHandler implements DomainEventHandler<OrderPaymentEvent> {
     @Autowired
-    private IProductService productService;
+    private IproductService productService;
     @Override
     public void handle(OrderPaymentEvent event) {
         OrderAggregate source = event.source();

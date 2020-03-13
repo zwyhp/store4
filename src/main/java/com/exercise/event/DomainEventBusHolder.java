@@ -3,12 +3,11 @@ package com.exercise.event;
 import com.exercise.event.eventinterface.DomainEventBus;
 import com.exercise.event.handler.DomainEventHandlerRegistry;
 import com.exercise.event.handler.DomainEventPublisher;
+import com.exercise.orderform.event.CreateOrderEvent;
+import com.exercise.orderform.event.CreateOrderEventHandler;
 import com.exercise.orderform.event.OrderPaymentEvent;
 import com.exercise.orderform.event.OrderPaymentEventHandler;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import javax.annotation.PostConstruct;
 
 /**
  * 使用ThreadLocal 管理事件
@@ -16,15 +15,8 @@ import javax.annotation.PostConstruct;
 
 @Component
 public class DomainEventBusHolder {
-    @Autowired
-    private OrderPaymentEventHandler orderPaymentEventHandler;
 
-    private static final  ThreadLocal<DomainEventBus> THREAD_LOCAL = new ThreadLocal<DomainEventBus>(){
-        @Override
-        protected DomainEventBus initialValue() {
-            return new DefaultDomainEventBus();
-        }
-    };
+    private static final  ThreadLocal<DomainEventBus> THREAD_LOCAL = ThreadLocal.withInitial(DefaultDomainEventBus::new);
 
     public static DomainEventPublisher getPubliser(){
         return THREAD_LOCAL.get();
@@ -38,9 +30,17 @@ public class DomainEventBusHolder {
         THREAD_LOCAL.remove();
     }
 
-    @PostConstruct
+    /*@PostConstruct
     public void init() {
-        THREAD_LOCAL.get().register(OrderPaymentEvent.class,orderPaymentEventHandler);
+        THREAD_LOCAL.get().register(OrderPaymentEvent.class, orderPaymentEventHandler);
+        THREAD_LOCAL.get().register(CreateOrderEvent.class, createOrderEventHandler);
+
+    }*/
+
+    static {
+        THREAD_LOCAL.get().register(OrderPaymentEvent.class,new OrderPaymentEventHandler());
+        THREAD_LOCAL.get().register(CreateOrderEvent.class,new CreateOrderEventHandler());
     }
+
 }
 

@@ -8,7 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.List;
 
-public interface IProductService extends IService<Products> {
+public interface IproductService extends IService<Products> {
     @Override
     int addObject(Products product);
 
@@ -22,7 +22,7 @@ public interface IProductService extends IService<Products> {
     List findAll();
 
     @Override
-    PageDomain pagingfindAll(int total, int pagesize);
+    PageDomain pagingFindAll(int total, int pageSize);
 
     @Override
     Products findObjectById(int id);

@@ -49,7 +49,7 @@ public class PermissionServiceImpl implements IpermissionService {
     }
 
     @Override
-    public PageDomain pagingfindAll(int total, int pagesize) {
+    public PageDomain pagingFindAll(int total, int pagesize) {
         int size = permissionRepository.findAll().size();
         BussinessUtil.pagingfind((size/pagesize)+1 < total);
         List users = permissionRepository.pagingfindPer(total, pagesize);

@@ -1,9 +1,9 @@
 package com.exercise.orderform.domain;
 
+import com.exercise.event.AbstractAggregateEvent;
 import com.exercise.event.DomainEventBusHolder;
 import com.exercise.event.eventinterface.Aggregate;
 import com.exercise.event.handler.DomainEventPublisher;
-import com.exercise.orderform.event.OrderPaymentEvent;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -51,9 +51,8 @@ public class OrderAggregate implements Aggregate {
         Payment = payment;
     }
 
-    public void enable(){
-        OrderPaymentEvent event = new OrderPaymentEvent(this);
+    public void enable(AbstractAggregateEvent aggregateEvent){
         DomainEventPublisher publiser = DomainEventBusHolder.getPubliser();
-        publiser.publish(event);
+        publiser.publish(aggregateEvent);
     }
 }

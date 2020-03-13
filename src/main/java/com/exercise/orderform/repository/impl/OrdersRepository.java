@@ -1,6 +1,7 @@
-package com.exercise.orderform.repository;
+package com.exercise.orderform.repository.impl;
 
 import com.exercise.orderform.domain.Orders;
+import com.exercise.orderform.repository.IOrdersRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.NativeQuery;
@@ -31,19 +32,18 @@ public class OrdersRepository implements IOrdersRepository {
 
 
     @Override
-    public Orders findOrdersByid(int id) {
-        Orders orders = currentSession().get(Orders.class, id);
-        return orders;
+    public Orders findOrdersById(int id) {
+        return currentSession().get(Orders.class, id);
     }
 
     @Override
-    public void deleteOrdersByid(int id) {
+    public void deleteOrdersById(int id) {
         Orders orders = currentSession().get(Orders.class, id);
         currentSession().delete(orders);
     }
 
     @Override
-    public void updateOrdersByid(Orders orders) {
+    public void updateOrdersById(Orders orders) {
         currentSession().update(orders);
     }
 
@@ -56,22 +56,22 @@ public class OrdersRepository implements IOrdersRepository {
     }
 
     @Override
-    public List pagingfindOrders(int total, int pagesize) {
+    public List pagingFindOrders(int total, int pagesize) {
         String sql = "SELECT * FROM Orders";
-        List list = currentSession().createNativeQuery(sql)
+        return currentSession().createNativeQuery(sql)
                 .addEntity(Orders.class)
                 .setFirstResult(total - 1)
                 .setMaxResults(pagesize)
                 .list();
-        return list;
+
     }
 
     @Override
     public List conditionsQuery(int uid) {
         String sql = "SELECT * FROM Orders where u_id = " +uid;
-        List list = currentSession().createNativeQuery(sql)
+        return currentSession().createNativeQuery(sql)
                 .addEntity(Orders.class)
                 .list();
-        return list;
+
     }
 }

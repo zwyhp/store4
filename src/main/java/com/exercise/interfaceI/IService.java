@@ -10,7 +10,7 @@ public interface IService<E> {
     void deleteObjectById(int id);
     void updateObjectById(E e);
     List findAll();
-    PageDomain pagingfindAll(int total, int pagesize);
+    PageDomain pagingFindAll(int total, int pagesize);
     E findObjectById(int id);
 
 }

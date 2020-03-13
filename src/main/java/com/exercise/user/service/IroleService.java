@@ -20,8 +20,11 @@ public interface IroleService extends IService<Role> {
     List findAll();
 
     @Override
-    PageDomain pagingfindAll(int total, int pagesize);
+    PageDomain pagingFindAll(int total, int pagesize);
 
     @Override
     Role findObjectById(int id);
+
+    Role findObjectByName(String name);
+
 }

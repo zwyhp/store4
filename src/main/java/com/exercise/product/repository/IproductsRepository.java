@@ -4,26 +4,26 @@ import com.exercise.product.domain.Products;
 
 import java.util.List;
 
-public interface IProductsRepository {
+public interface IproductsRepository {
     int save(Products product);
 
-    Products findProductsByname(String name);
+    Products findProductsByName(String name);
 
     Products findProductsById(int id);
 
-    void deleteProductsByid(int id);
+    void deleteProductsById(int id);
 
-    void updateProductsByid(Products product);
+    void updateProductsById(Products product);
 
     List findAll();
 
-    List pagingfindProducts(int total, int pagesize);
+    List pagingFindProducts(int total, int pagesize);
 
     List conditionsQuery(String name);
 
     List conditionsQuery(int uid);
 
-    void updateImgByid(int id, String url);
+    void updateImgById(int id, String url);
 
     Products findImgByMD5Name(String MD5name);
 }

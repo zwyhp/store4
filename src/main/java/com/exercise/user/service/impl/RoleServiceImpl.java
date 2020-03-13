@@ -52,11 +52,11 @@ public class RoleServiceImpl implements IroleService {
     }
 
     @Override
-    public PageDomain pagingfindAll(int total, int pagesize) {
+    public PageDomain pagingFindAll(int total, int pageSize) {
         int size = roleRepository.findAll().size();
-        BussinessUtil.pagingfind((size/pagesize)+1 < total);
-        List users = roleRepository.pagingfindRole(total, pagesize);
-        return new PageDomain(total, pagesize, size, users);
+        BussinessUtil.pagingfind((size/pageSize)+1 < total);
+        List users = roleRepository.pagingFindRole(total, pageSize);
+        return new PageDomain(total, pageSize, size, users);
 
     }
 
@@ -65,5 +65,12 @@ public class RoleServiceImpl implements IroleService {
         Role roleById = roleRepository.findRoleById(id);
         BussinessUtil.isNull(roleById,BussinessUtil.ROLE_INEXISTENCE);
         return roleById;
+    }
+
+    @Override
+    public Role findObjectByName(String name) {
+        Role role= roleRepository.findRoleByname(name);
+        BussinessUtil.isNull(role,BussinessUtil.ROLE_INEXISTENCE);
+        return role;
     }
 }

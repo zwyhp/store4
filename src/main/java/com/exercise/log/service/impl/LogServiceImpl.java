@@ -1,8 +1,9 @@
-package com.exercise.log.service;
+package com.exercise.log.service.impl;
 
 import com.exercise.domain.PageDomain;
 import com.exercise.log.domain.LogDomin;
 import com.exercise.log.repository.IlogRePository;
+import com.exercise.log.service.ILogService;
 import com.exercise.util.BussinessUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,7 +50,7 @@ public class LogServiceImpl implements ILogService {
     }
 
     @Override
-    public PageDomain pagingfindAll(int total, int pagesize) {
+    public PageDomain pagingFindAll(int total, int pagesize) {
         int size = ilogRePository.findAll().size();
         List logDomins = ilogRePository.PagingfindLog(total, pagesize);
         return new PageDomain(total,pagesize,size,logDomins);

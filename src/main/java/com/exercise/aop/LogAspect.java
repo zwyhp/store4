@@ -1,6 +1,7 @@
-package com.exercise.log;
+package com.exercise.aop;
 
 
+import com.exercise.interfaceI.NotLog;
 import com.exercise.log.service.ILogService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
@@ -25,7 +26,6 @@ import java.util.Date;
 /**
  * 日志切面类
  *
- * @author oKong
  */
 //加入@Aspect 申明一个切面
 @Aspect
@@ -35,7 +35,6 @@ public class LogAspect {
 
     @Autowired
     private ILogService logService;
-
     //设置切入点：这里直接拦截被@RestController注解的类
     @Pointcut("within(@org.springframework.web.bind.annotation.RestController *)")
     public void pointcut() {
@@ -70,11 +69,10 @@ public class LogAspect {
         MethodSignature methodSign = (MethodSignature) signature;
         Method method = methodSign.getMethod();
         //判断是否包含了 无需记录日志的方法
-        Log loggerAnno = AnnotationUtils.getAnnotation(method, Log.class);
-        if (loggerAnno != null && loggerAnno.ignore()) {
+        NotLog loggerAnno = AnnotationUtils.getAnnotation(method, NotLog.class);
+        if (loggerAnno != null ) {
             return object;
         }
-        /*logger.info("logger注解描述：{}", loggerAnno.desc());*/
         long endTime = System.currentTimeMillis();
         logger.info("结束计时: {},  URI: {},耗时：{}", new Date(), uri, endTime - beginTime);
         Subject subject = SecurityUtils.getSubject();

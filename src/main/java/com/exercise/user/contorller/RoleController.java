@@ -1,6 +1,7 @@
 package com.exercise.user.contorller;
 
 import com.exercise.domain.PageDomain;
+import com.exercise.interfaceI.NotLog;
 import com.exercise.user.domain.Role;
 import com.exercise.user.service.IroleService;
 import com.exercise.util.ResponseUtil;
@@ -39,6 +40,7 @@ public class RoleController {
         return ResponseUtil.ok();
     }
 
+    @NotLog
     @GetMapping("/roles")
     @RequiresPermissions("admin:role")
     public Object role(@RequestParam(value = "pagenum",defaultValue = "1") int pagenum,
@@ -46,10 +48,25 @@ public class RoleController {
         if (pagenum <= 0 ){
             return ResponseUtil.badArgument("页码必须为整数");
         }
-        PageDomain pageDomain = roleService.pagingfindAll(pagenum, pagesize);
+        PageDomain pageDomain = roleService.pagingFindAll(pagenum, pagesize);
         return ResponseUtil.ok(pageDomain);
     }
 
+    @NotLog
+    @GetMapping("/role/{id}")
+    @RequiresPermissions("admin:role")
+    public Object findRoleById(@PathVariable int id){
+        Role objectById = roleService.findObjectById(id);
+        return ResponseUtil.ok(objectById);
+    }
+
+    @NotLog
+    @GetMapping("/role/{name}")
+    @RequiresPermissions("admin:role")
+    public Object findRoleById(@PathVariable String name){
+        Role objectById = roleService.findObjectByName(name);
+        return ResponseUtil.ok(objectById);
+    }
 
 
 }

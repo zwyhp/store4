@@ -10,10 +10,10 @@ import java.util.List;
 public interface IOrderItemRepository {
     int save(Orderitem orderitem);
 
-    void deleteOrderitemByOid(int oId);
+    void deleteOrderItemByOid(int oId);
 
-    void updateOrderitem(Orderitem orderitem);
+    void updateOrderItem(Orderitem orderitem);
 
-    List findOrderitemByOid(int oId);
+    List findOrderItemByOid(int oId);
 
 }

@@ -6,7 +6,7 @@ import com.exercise.orderform.domain.OrderAggregate;
 
 import java.util.List;
 
-public interface IOrdersService extends IService<OrderAggregate> {
+public interface IordersService extends IService<OrderAggregate> {
     @Override
     int addObject(OrderAggregate orderAggregate);
 
@@ -20,7 +20,7 @@ public interface IOrdersService extends IService<OrderAggregate> {
     List findAll();
 
     @Override
-    PageDomain pagingfindAll(int total, int pagesize);
+    PageDomain pagingFindAll(int total, int pagesize);
 
     @Override
     OrderAggregate findObjectById(int id);
