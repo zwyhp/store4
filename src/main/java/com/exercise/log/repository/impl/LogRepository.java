@@ -33,14 +33,14 @@ public class LogRepository implements IlogRePository {
     }
 
     @Override
-    public LogDomin findUserByname(String username) {
+    public LogDomin findLogByname(String username) {
         String sql = "select * FROM log where u_name = " + username;
         NativeQuery nativeQuery = currentSession().createNativeQuery(sql).addEntity(LogDomin.class);
         return (LogDomin)nativeQuery.list().get(0);
     }
 
     @Override
-    public LogDomin findUserById(int id) {
+    public LogDomin findLogById(int id) {
         String hql = "select * FROM log where id = " + id;
         NativeQuery nativeQuery = currentSession().createNativeQuery(hql).addEntity(LogDomin.class);
         return (LogDomin)nativeQuery.list().get(0);
@@ -48,7 +48,7 @@ public class LogRepository implements IlogRePository {
     }
 
     @Override
-    public void deleteUserByid(int id) {
+    public void deleteLogByid(int id) {
         LogDomin logDomin = currentSession().get(LogDomin.class, id);
         currentSession().delete(logDomin);
     }

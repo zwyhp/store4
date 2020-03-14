@@ -110,6 +110,12 @@ public class UserController {
         return userService.conditionsQuery(roleId);
 
     }
-
+    @PutMapping("/admin/allotRole")
+    @RequiresPermissions("admin:user")
+    public Object allotRole(@RequestParam(value = "id" )  int id,
+                             @RequestParam(value = "rid")  int rid){
+        userService.allotRole(id,rid);
+        return ResponseUtil.ok();
+    }
 
 }

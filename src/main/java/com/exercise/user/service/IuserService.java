@@ -29,4 +29,7 @@ public interface IuserService extends IService<User> {
      List conditionsQuery(int roleid);
 
      User findUserByname(String username);
+
+    void allotRole(int id, int rid);
+
 }

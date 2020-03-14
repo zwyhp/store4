@@ -43,14 +43,17 @@ public class ProductController {
     }
 
     @GetMapping("/product")
-    public Object Product(@RequestParam(value = "pagenum",defaultValue = "1") int pagenum,
-                       @RequestParam(value = "pagesize",defaultValue = "10") int pagesize){
-        if (pagenum <= 0 ){
+    public Object Product(@RequestParam(value = "pageNum",defaultValue = "1") int pageNum,
+                       @RequestParam(value = "pageSize",defaultValue = "10") int pageSize,
+                          @RequestParam(value = "categoty") String categoty){
+        if (pageNum <= 0 ){
             return ResponseUtil.badArgument("页码必须为正数");
         }
-        PageDomain pageDomain = productService.pagingFindAll(pagenum, pagesize);
+        PageDomain pageDomain = productService.pagingFindAll(pageNum, pageSize,categoty);
         return ResponseUtil.ok(pageDomain);
     }
+
+
 
     @PostMapping("/updateimg")
     @RequiresPermissions("admin:product")

@@ -68,6 +68,17 @@ public class ProductsRepository implements IproductsRepository {
                 .list();
     }
 
+
+    public List pagingFindProducts(int total, int pageSize,String categoty) {
+        String sql = "SELECT * FROM Products where categoty = :categoty";
+        return currentSession().createNativeQuery(sql)
+                .addEntity(Products.class)
+                .setParameter("categoty",categoty)
+                .setFirstResult(total - 1)
+                .setMaxResults(pageSize)
+                .list();
+    }
+
     @Override
     public List conditionsQuery(String name) {
         String sql = "SELECT * FROM user where name like :name";
@@ -86,6 +97,7 @@ public class ProductsRepository implements IproductsRepository {
                 .list();
 
     }
+
 
     public void updateImgById(int id, String url){
         Products productsById = findProductsById(id);

@@ -34,9 +34,9 @@ public class LogServiceImpl implements ILogService {
 
     @Override
     public void deleteObjectById(int id) {
-        LogDomin userById = ilogRePository.findUserById(id);
-        BussinessUtil.isNull(userById,BussinessUtil.LOG_INEXISTENCE);
-        ilogRePository.deleteUserByid(id);
+        LogDomin log = ilogRePository.findLogById(id);
+        BussinessUtil.isNull(log,BussinessUtil.LOG_INEXISTENCE);
+        ilogRePository.deleteLogByid(id);
     }
 
     @Override
@@ -59,6 +59,14 @@ public class LogServiceImpl implements ILogService {
 
     @Override
     public LogDomin findObjectById(int id) {
-        return ilogRePository.findUserById(id);
+        return ilogRePository.findLogById(id);
+    }
+
+    @Override
+    public void deleteAllLog() {
+        List<LogDomin> all = (List<LogDomin>) findAll();
+        for (LogDomin log : all) {
+            ilogRePository.deleteLogByid(log.getId());
+        }
     }
 }

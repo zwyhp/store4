@@ -26,4 +26,6 @@ public interface IpermissionService extends IService<Permission> {
     Permission findObjectById(int id);
 
     List<Permission> findPermissionByRoleId(int id);
+
+    void bindRole(int id, int rid);
 }

@@ -42,4 +42,15 @@ public class ShopCartRepository implements IshopCartRepository {
                 .setParameter("uId",uId)
                 .list();
     }
+
+    @Override
+    public ShopCart findCartByPid(int uid, int pid) {
+        String sql = "SELECT * FROM shoppingcart where u_id = :uId and p_id = :pid";
+        List list = currentSession().createNativeQuery(sql)
+                .addEntity(ShopCart.class)
+                .setParameter("uId", uid)
+                .setParameter("pid", pid)
+                .list();
+        return list.isEmpty() ? null :(ShopCart) list.get(0);
+    }
 }

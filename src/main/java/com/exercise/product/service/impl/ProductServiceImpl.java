@@ -56,6 +56,15 @@ public class ProductServiceImpl implements IproductService {
         return new PageDomain(total, pageSize, size, users);
     }
 
+    public PageDomain pagingFindAll(int total, int pageSize,String categoty) {
+        if (categoty==null||categoty.isEmpty()){
+           return pagingFindAll(total, pageSize);
+        }
+        int size = productsRepository.pagingFindProducts(total, pageSize,categoty).size();
+        BussinessUtil.pagingfind((size/ pageSize)+1 < total);
+        List users = productsRepository.pagingFindProducts(total, pageSize,categoty);
+        return new PageDomain(total, pageSize, size, users);
+    }
     @Override
     public Products findObjectById(int id) {
         Products productsById = productsRepository.findProductsById(id);

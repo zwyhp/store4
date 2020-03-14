@@ -7,11 +7,11 @@ import java.util.List;
 public interface IlogRePository {
     int save(LogDomin log);
 
-    LogDomin findUserByname(String username);
+    LogDomin findLogByname(String username);
 
-    LogDomin findUserById(int id);
+    LogDomin findLogById(int id);
 
-    void deleteUserByid(int id);
+    void deleteLogByid(int id);
 
     List findAll();
 

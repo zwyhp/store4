@@ -8,4 +8,5 @@ public interface IshopCartRepository {
     void addOrUpdateCart(ShopCart shopCart);
     void reduceShop(int id);
     List findCartByUid(int uId);
+    ShopCart findCartByPid(int uid,int pid);
 }

@@ -24,6 +24,8 @@ public interface IproductService extends IService<Products> {
     @Override
     PageDomain pagingFindAll(int total, int pageSize);
 
+    PageDomain pagingFindAll(int total, int pageSize,String categoty);
+
     @Override
     Products findObjectById(int id);
 

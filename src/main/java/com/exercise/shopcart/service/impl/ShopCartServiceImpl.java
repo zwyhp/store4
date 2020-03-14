@@ -24,8 +24,15 @@ public class ShopCartServiceImpl implements IshopCartService {
 
     @Override
     public int addObject(ShopCart shopCart) {
-        shopcartRepository.addOrUpdateCart(shopCart);
-        return 1;
+        ShopCart cartByPid = shopcartRepository.findCartByPid(shopCart.getuId(), shopCart.getpId());
+        if (cartByPid != null ){
+            cartByPid.setNum(cartByPid.getNum()+shopCart.getNum());
+            shopcartRepository.addOrUpdateCart(cartByPid);
+            return 1;
+        }else {
+            shopcartRepository.addOrUpdateCart(shopCart);
+            return 1;
+        }
     }
 
     @Override

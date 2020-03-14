@@ -26,4 +26,6 @@ public interface ILogService extends IService<LogDomin> {
 
     @Override
     LogDomin findObjectById(int id);
+
+    void deleteAllLog();
 }

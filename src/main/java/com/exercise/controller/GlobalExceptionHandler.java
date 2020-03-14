@@ -12,6 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.MissingServletRequestParameterException;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -19,7 +21,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import java.io.IOException;
 
 
-//@ControllerAdvice
+@ControllerAdvice
 public class GlobalExceptionHandler {
     private Logger log = LoggerFactory.getLogger(this.getClass());
 
@@ -49,6 +51,14 @@ public class GlobalExceptionHandler {
        return ResponseUtil.badArgument(msg);
     }
 
+
+    @ExceptionHandler(MissingServletRequestParameterException.class)   //此处为自定义业务异常类
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)   //返回一个指定的http response状态码
+    @ResponseBody
+    public Object notFount(MissingServletRequestParameterException e) {
+        log.error("输入参数错误:", e);
+        return ResponseUtil.badArgument("输入参数错误");
+    }
     /**
      * 拦截业务异常
      */
@@ -57,7 +67,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public Object notFount(BussinessException e) {
         log.error("业务异常:", e);
-        return ResponseUtil.unsupport();
+        return ResponseUtil.unsupport(e.getMessage());
     }
 
     /**
@@ -111,12 +121,6 @@ public class GlobalExceptionHandler {
         log.error(e.getMessage());
         return ResponseUtil.unsupport();
     }
-
-
-
-
-
-
 
 
 }

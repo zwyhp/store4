@@ -26,17 +26,18 @@ public class PermissionController {
         return i>0? ResponseUtil.ok():ResponseUtil.fail();
     }
 
-    @PutMapping("/permission")
-    @RequiresPermissions("admin:permission")
-    public Object updetepermission(@RequestBody @Validated(VerifyUpdate.class) Permission permission){
-        permissionService.updateObjectById(permission);
-        return ResponseUtil.ok();
-    }
 
     @DeleteMapping("/permission/{id}")
     @RequiresPermissions("admin:permission")
     public Object permission(@PathVariable int id){
         permissionService.deleteObjectById(id);
+        return ResponseUtil.ok();
+    }
+
+    @PutMapping("/permission")
+    @RequiresPermissions("admin:permission")
+    public Object updetepermission(@RequestBody @Validated(VerifyUpdate.class) Permission permission){
+        permissionService.updateObjectById(permission);
         return ResponseUtil.ok();
     }
 
@@ -51,6 +52,18 @@ public class PermissionController {
         PageDomain pageDomain = permissionService.pagingFindAll(pagenum, pagesize);
         return ResponseUtil.ok(pageDomain);
     }
-
+    /**
+     * 给权限绑定角色
+     * @param id 权限id
+     * @param rid 角色id
+     * @return
+     */
+    @PutMapping("/bindRole")
+    @RequiresPermissions("admin:permission")
+    public Object bindRole(@RequestParam(value = "id" )  int id,
+                           @RequestParam(value = "rid")  int rid){
+        permissionService.bindRole(id,rid);
+        return ResponseUtil.ok();
+    }
 
 }

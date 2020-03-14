@@ -1,7 +1,9 @@
 package com.exercise.user.service.impl;
 
 import com.exercise.domain.PageDomain;
+import com.exercise.user.domain.Role;
 import com.exercise.user.domain.User;
+import com.exercise.user.repository.IRoleRepository;
 import com.exercise.user.repository.IuserRepository;
 import com.exercise.user.service.IuserService;
 import com.exercise.util.BussinessUtil;
@@ -18,6 +20,9 @@ import java.util.List;
 public class UserServiceImpl implements IuserService {
     @Autowired
     private IuserRepository iuserRepository;
+
+    @Autowired
+    private IRoleRepository roleRepository;
 
     @Override
     public int addObject(User user) {
@@ -40,7 +45,9 @@ public class UserServiceImpl implements IuserService {
     public void updateObjectById(User user) {
         User userById = iuserRepository.findUserById(user.getId());
         BussinessUtil.isNull(userById,BussinessUtil.USER_INEXISTENCE);
-        BussinessUtil.isnotNull(iuserRepository.findUserByname(user.getUsername()),BussinessUtil.USERNAME_REPETITION);
+        if (!userById.getUsername().equals(user.getUsername())) {
+            BussinessUtil.isnotNull(iuserRepository.findUserByname(user.getUsername()), BussinessUtil.USERNAME_REPETITION);
+        }
         userById.copy(user);
         iuserRepository.updateUser(userById);
     }
@@ -77,4 +84,13 @@ public class UserServiceImpl implements IuserService {
         return iuserRepository.findUserByname(username);
     }
 
+    @Override
+    public void allotRole(int id, int rid) {
+        User user = iuserRepository.findUserById(id);
+        BussinessUtil.isNull(user,BussinessUtil.USER_INEXISTENCE);
+        Role role = roleRepository.findRoleById(rid);
+        BussinessUtil.isNull(role,BussinessUtil.ROLE_INEXISTENCE);
+        user.setRoleId(rid);
+        updateObjectById(user);
+    }
 }

@@ -2,7 +2,9 @@ package com.exercise.user.service.impl;
 
 import com.exercise.domain.PageDomain;
 import com.exercise.user.domain.Permission;
+import com.exercise.user.domain.Role;
 import com.exercise.user.repository.IPermissionRepository;
+import com.exercise.user.repository.IRoleRepository;
 import com.exercise.user.service.IpermissionService;
 import com.exercise.util.BussinessUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,8 @@ import java.util.List;
 public class PermissionServiceImpl implements IpermissionService {
     @Autowired
     private IPermissionRepository permissionRepository;
+    @Autowired
+    private IRoleRepository roleRepository;
     @Override
     public int addObject(Permission permission) {
         Permission permissionByPer = permissionRepository.findPermissionByPer(permission.getPermission());
@@ -37,7 +41,9 @@ public class PermissionServiceImpl implements IpermissionService {
     public void updateObjectById(Permission permission) {
         Permission permissionByPer = permissionRepository.findPermissionById(permission.getId());
         BussinessUtil.isNull(permissionByPer,BussinessUtil.PER_INEXISTENCE);
-        BussinessUtil.isnotNull(permissionRepository.findPermissionByPer(permission.getPermission()),BussinessUtil.PERNAME_REPETITION);
+        if (!permissionByPer.getPermission().equals(permission.getPermission())) {
+            BussinessUtil.isnotNull(permissionRepository.findPermissionByPer(permission.getPermission()), BussinessUtil.PERNAME_REPETITION);
+        }
         permissionByPer.copy(permission);
         permissionByPer.setUpdateTime(LocalDateTime.now());
         permissionRepository.updatePermission(permissionByPer);
@@ -67,5 +73,15 @@ public class PermissionServiceImpl implements IpermissionService {
     public List<Permission> findPermissionByRoleId(int id){
         List<Permission> permissions = (List<Permission>)permissionRepository.findPermissionByRoleId(id);
         return permissions;
+    }
+
+    @Override
+    public void bindRole(int id, int rid) {
+        Permission permission = permissionRepository.findPermissionById(id);
+        BussinessUtil.isNull(permission,BussinessUtil.USER_INEXISTENCE);
+        Role role = roleRepository.findRoleById(rid);
+        BussinessUtil.isNull(role,BussinessUtil.ROLE_INEXISTENCE);
+        permission.setRoleId(rid);
+        updateObjectById(permission);
     }
 }

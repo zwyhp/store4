@@ -19,6 +19,8 @@ public interface IproductsRepository {
 
     List pagingFindProducts(int total, int pagesize);
 
+    List pagingFindProducts(int total, int pageSize,String categoty);
+
     List conditionsQuery(String name);
 
     List conditionsQuery(int uid);
