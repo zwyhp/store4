@@ -1,5 +1,8 @@
 package com.exercise.util.verify;
 
+/**
+ * 参数错误
+ */
 public class VerifyError {
     public static final String ID_NOT_NULL = "id不能为空";
 
@@ -33,11 +36,5 @@ public class VerifyError {
     public static final String CART_UID_NOT_NULL = "购物车的用户id不能为空";
     public static final String CART_PID_NOT_NULL = "商品ID不能为空";
     public static final String CART_NUM_NOT_NULL = "商品数量不能为空";
-
-
-
-
-
-
 
 }

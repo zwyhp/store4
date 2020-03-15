@@ -27,7 +27,6 @@ import java.util.Date;
  * 日志切面类
  *
  */
-//加入@Aspect 申明一个切面
 @Aspect
 @Component
 public class LogAspect {

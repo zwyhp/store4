@@ -6,6 +6,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
 
+/**
+ * 上传文件工具类
+ */
 public class FileUtil {
 
     public static String uploadFile1(MultipartFile file) throws IOException{

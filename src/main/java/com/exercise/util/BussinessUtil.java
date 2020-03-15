@@ -1,5 +1,9 @@
 package com.exercise.util;
 
+
+/**
+ * 业务异常工具类
+ */
 public class BussinessUtil {
     public static final String USER_INEXISTENCE = "用户不存在";
     public static final String ROLE_INEXISTENCE = "角色不存在";
