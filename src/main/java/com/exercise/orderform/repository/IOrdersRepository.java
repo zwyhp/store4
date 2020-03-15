@@ -16,6 +16,7 @@ public interface IOrdersRepository {
     List findAll();
 
     List pagingFindOrders(int total, int pagesize);
+    List  pagingFindOrders(int total, int pageSize, int uid, String sort);
 
     List conditionsQuery(int uid);
 }

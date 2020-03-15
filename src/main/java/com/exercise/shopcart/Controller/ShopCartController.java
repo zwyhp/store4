@@ -24,6 +24,7 @@ public class ShopCartController {
 
     @NotLog
     @PostMapping("/addShop")
+    @RequiresPermissions("user:user")
     public Object addShopCart(@RequestBody @Validated ShopCart shopCart){
         shopCartService.addObject(shopCart);
         return ResponseUtil.ok();

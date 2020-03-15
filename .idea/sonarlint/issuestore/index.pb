@@ -165,3 +165,5 @@ m
 =src/main/java/com/exercise/log/repository/IlogRePository.java,0\b\0b0f41a676d5eceb4eba36da8117f4ce12f1cfcd
 d
 4src/main/java/com/exercise/timetask/LogTimeTask.java,4\9\498b930f664176ed2107c386151878f8b4153e84
+L
+src/main/resources/store.sql,1\9\19f90b2868a121d00e68fa87c94e75df3d10f47b

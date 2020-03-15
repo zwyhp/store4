@@ -56,12 +56,24 @@ public class OrdersRepository implements IOrdersRepository {
     }
 
     @Override
-    public List pagingFindOrders(int total, int pagesize) {
+    public List pagingFindOrders(int total, int pageSize) {
         String sql = "SELECT * FROM Orders";
         return currentSession().createNativeQuery(sql)
                 .addEntity(Orders.class)
                 .setFirstResult(total - 1)
-                .setMaxResults(pagesize)
+                .setMaxResults(pageSize)
+                .list();
+    }
+
+    @Override
+    public List pagingFindOrders(int total, int pageSize, int uid, String sort) {
+        String sql = "SELECT * FROM Orders where u_id = :uid order by :sort";
+        return currentSession().createNativeQuery(sql)
+                .addEntity(Orders.class)
+                .setParameter("uid",uid)
+                .setParameter("sort",sort)
+                .setFirstResult(total - 1)
+                .setMaxResults(pageSize)
                 .list();
 
     }

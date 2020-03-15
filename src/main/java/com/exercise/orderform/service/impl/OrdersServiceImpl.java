@@ -9,6 +9,8 @@ import com.exercise.orderform.event.OrderPaymentEvent;
 import com.exercise.orderform.repository.IOrderItemRepository;
 import com.exercise.orderform.repository.IOrdersRepository;
 import com.exercise.orderform.service.IordersService;
+import com.exercise.user.domain.User;
+import com.exercise.user.repository.IuserRepository;
 import com.exercise.util.BussinessUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +27,8 @@ public class OrdersServiceImpl implements IordersService {
     private IOrdersRepository ordersRepository;
     @Autowired
     private IOrderItemRepository orderItemRepository;
+    @Autowired
+    private IuserRepository userRepository;
 
 
     @Override
@@ -74,16 +78,29 @@ public class OrdersServiceImpl implements IordersService {
 
     @Override
     public PageDomain pagingFindAll(int total, int pageSize) {
-        List pagelist = new ArrayList();
         List<Orders> orders = (List<Orders>)ordersRepository.pagingFindOrders(total, pageSize);
+        List orderItems = getOrderItems(orders);
+        return new PageDomain(total,pageSize,orders.size(),orderItems);
+    }
+
+    @Override
+    public PageDomain pagingFindAll(int total, int pageSize, String username, String sort) {
+        User user = userRepository.findUserByname(username);
+        List<Orders> orders = (List<Orders>)ordersRepository.pagingFindOrders(total, pageSize, user.getId(), sort);
+        List orderItems = getOrderItems(orders);
+        return new PageDomain(total,pageSize,orders.size(),orderItems);
+    }
+
+    private List getOrderItems(List<Orders> orders){
+        List orderItems = new ArrayList();
         for (Orders order : orders){
             OrderAggregate orderAggregate = new OrderAggregate();
             orderAggregate.setOrders(order);
             orderAggregate.setOrderitem(orderItemRepository.findOrderItemByOid(order.getId()));
             orderAggregate.setPayment(order.getPaystate());
-            pagelist.add(orderAggregate);
+            orderItems.add(orderAggregate);
         }
-        return new PageDomain(total,pageSize,findAll().size(),pagelist);
+        return orderItems;
     }
 
     @Override

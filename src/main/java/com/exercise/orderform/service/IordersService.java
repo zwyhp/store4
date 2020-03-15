@@ -20,7 +20,9 @@ public interface IordersService extends IService<OrderAggregate> {
     List findAll();
 
     @Override
-    PageDomain pagingFindAll(int total, int pagesize);
+    PageDomain pagingFindAll(int total, int pageSize);
+
+    PageDomain pagingFindAll(int total, int pageSize,String username,String sort);
 
     @Override
     OrderAggregate findObjectById(int id);

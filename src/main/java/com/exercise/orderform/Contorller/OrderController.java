@@ -5,8 +5,10 @@ import com.exercise.orderform.domain.OrderAggregate;
 import com.exercise.orderform.service.IordersService;
 import com.exercise.util.ResponseUtil;
 import com.exercise.util.verify.VerifyUpdate;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -59,17 +61,19 @@ public class OrderController {
     }
 
     /**
-     * 用户查询自己账单
+     * 用户查询自己订单
      */
-    /*@GetMapping("/user/order")
+    @GetMapping("/user/order")
     @RequiresPermissions(value = "user:user")
-    public Object getUserOrder(@RequestParam(value = "pagenum",defaultValue = "1") int pagenum,
-                        @RequestParam(value = "pagesize",defaultValue = "10") int pagesize){
-        if (pagenum <= 0 ){
+    public Object getUserOrder(@RequestParam(value = "pageNum",defaultValue = "1") int pageNum,
+                            @RequestParam(value = "pageSize",defaultValue = "10") int pageSize,
+                               @RequestParam(value = "sort ",defaultValue = "ordertime") String sort   ){
+        if (pageNum <= 0 ){
             return ResponseUtil.badArgument("页码必须为正数");
         }
-
-        PageDomain pageDomain = ordersService.pagingfindAll(pagenum, pagesize);
+        Subject subject = SecurityUtils.getSubject();
+        Object username = subject.getPrincipal();
+        PageDomain pageDomain = ordersService.pagingFindAll(pageNum, pageSize);
         return ResponseUtil.ok(pageDomain);
-    }*/
+    }
 }

@@ -31,7 +31,7 @@ public class Orders {
     @Column(name = "paystate")
     private int paystate;
     @Column(name = "ordertime")
-    private LocalDateTime ordertime;
+    private LocalDateTime orderTime;
 
     public Orders() {
 
@@ -43,7 +43,7 @@ public class Orders {
         this.receiverAddress = receiverAddress;
         this.receiverPhone = receiverPhone;
         this.paystate = paystate;
-        this.ordertime = ordertime;
+        this.orderTime = ordertime;
     }
 
     public int getId() {
@@ -95,11 +95,11 @@ public class Orders {
     }
 
     public LocalDateTime getDateTime() {
-        return ordertime;
+        return orderTime;
     }
 
     public void setDateTime(LocalDateTime ordertime) {
-        this.ordertime = ordertime;
+        this.orderTime = ordertime;
     }
 
     public void copy(Orders orders){
