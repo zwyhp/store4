@@ -6,4 +6,5 @@ package com.exercise.util;
  */
 public class xxxxx {
 	private String eeeee;
+	private String xxxxxxxx;
 }
