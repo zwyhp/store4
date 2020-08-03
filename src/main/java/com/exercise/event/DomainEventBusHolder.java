@@ -16,6 +16,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class DomainEventBusHolder {
 
+
+
     private static final  ThreadLocal<DomainEventBus> THREAD_LOCAL = ThreadLocal.withInitial(DefaultDomainEventBus::new);
 
     public static DomainEventPublisher getPubliser(){
@@ -32,6 +34,7 @@ public class DomainEventBusHolder {
 
     /*@PostConstruct
     public void init() {
+        THREAD_LOCAL.remove();
         THREAD_LOCAL.get().register(OrderPaymentEvent.class, orderPaymentEventHandler);
         THREAD_LOCAL.get().register(CreateOrderEvent.class, createOrderEventHandler);
 

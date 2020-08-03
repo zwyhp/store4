@@ -55,7 +55,6 @@
       <!--http://blog.csdn.net/daihui05/article/details/7476976-->
       <scope>provided</scope>
     </dependency>
-    <!-- https://mvnrepository.com/artifact/javax.json/javax.json-api -->
     <dependency>
       <groupId>javax.validation</groupId>
       <artifactId>validation-api</artifactId>

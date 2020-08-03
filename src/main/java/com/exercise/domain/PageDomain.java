@@ -6,7 +6,7 @@ import java.util.List;
 public class PageDomain {
     private int total;  /*当前页*/
     private int pageNum; /*总页数*/
-    private int pageSize; /*页面大小*/
+    private int pageSize    ; /*页面大小*/
     private int allDataSize; /*总数据条数*/
     private List data;
 
